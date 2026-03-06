@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bliv Medlem - NAT Revyen</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar placeholder -->
+<div id="navbar"></div>
+
+<!-- CONTENT -->
+<section class="about" style="padding-top: 120px;">
+	<div class="about-inner">
+		<div class="about-text-wrapper">
+			<h2>Bliv Medlem</h2>
+			<p>
+				Vi leder hele tiden efter nye medlemmer. Tilmelding foregår gennem NemTilmeld, og for spørgsmål kan revyen kontaktes gennem Facebook eller e-post natrevy@org.sdu.dk.
+			</p>
+			<p>
+				<strong>Tilmelding:</strong> <a href="https://sdusnatrevy.nemtilmeld.dk/" target="_blank">NemTilmeld</a>
+			</p>
+			<p>
+				<strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61552933400622" target="_blank">NAT Revyen</a>
+			</p>
+			<p>
+				<strong>E-mail:</strong> <a href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a>
+			</p>
+		</div>
+
+		<div class="about-images">
+			<img src="images/group.jpg" alt="NAT Revy gruppe">
+			<img src="images/social.jpg" alt="NAT Revy arrangement">
+		</div>
+	</div>
+</section>
+
+<!-- Footer placeholder -->
+<div id="footer"></div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		// Load navbar
+		fetch("navbar.html")
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById("navbar").innerHTML = data;
+
+				// Reattach hamburger menu
+				const hamburger = document.getElementById("hamburger");
+				const mobileMenu = document.getElementById("mobileMenu");
+
+				if (hamburger) {
+					hamburger.addEventListener("click", () => {
+						mobileMenu.classList.toggle("active");
+					});
+				}
+
+				// Highlight active page
+				const links = document.querySelectorAll('.nav-links a');
+				links.forEach(link => {
+					if (link.textContent.trim().toLowerCase() === 'bliv medlem') {
+						link.classList.add('active');
+					}
+				});
+			});
+
+		// Load footer
+		fetch("footer.html")
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById("footer").innerHTML = data;
+			});
+	});
+</script>
+
+</body>
+</html>
+
