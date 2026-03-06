@@ -1,94 +1,92 @@
 <!DOCTYPE html>
 <html lang="da">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>NAT REVY</title>
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="style.css" />
-</head>
-<script>
-	fetch("navbar.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("navbar").innerHTML = data;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NAT REVY</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script>
+    fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+	document.getElementById("navbar").innerHTML = data;
 
-				// Reattach hamburger event AFTER loading
-				const hamburger = document.getElementById("hamburger");
-				const mobileMenu = document.getElementById("mobileMenu");
+	// Reattach hamburger event AFTER loading
+	const hamburger = document.getElementById("hamburger");
+	const mobileMenu = document.getElementById("mobileMenu");
 
-				if (hamburger) {
-					hamburger.addEventListener("click", () => {
-						mobileMenu.classList.toggle("active");
-					});
-				}
-			});
-</script>
-<body>
+	if (hamburger) {
+	    hamburger.addEventListener("click", () => {
+		mobileMenu.classList.toggle("active");
+	    });
+	}
+    });
+  </script>
+  <body>
 
-<header class="navbar">
-	<div id="navbar"></div>
-</header>
+    <div id="navbar"></div>
 
-<section class="hero">
-	<div class="hero-overlay"></div>
-	<div class="hero-content">
-		<h1>NAT-Revy</h1>
-		<p>Studenterdrevet revy på SDU</p>
-		<a href="bliv-medlem.html" class="btn-cta hero-cta">Bliv Medlem</a>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+	<h1>NAT-Revy</h1>
+	<p>Studenterdrevet revy på SDU</p>
+	<a href="bliv-medlem.html" class="btn-cta hero-cta">Bliv Medlem</a>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="about-inner">
+
+	<div class="about-text-wrapper">
+	  <h2>NAT Revyen samler studerende om satire, musik og fællesskab</h2>
+	  <p>
+	    NAT Revyen er en studenterdrevet forening på SDU, hvor omkring 30 engagerede
+	    studerende hvert år skaber en revy fyldt med sketches, sange og scenografi.
+	    Vi arbejder sammen på tværs af studieretninger og opfører forestillingen
+	    i Studenterhuset Odense den første weekend i oktober.
+	  </p>
+	  <img src="images/logoNAT.svg" alt="NAT REVY logo" class="about-logo">
 	</div>
-</section>
 
-<section class="about">
-	<div class="about-inner">
-
-		<div class="about-text-wrapper">
-			<h2>NAT Revyen samler studerende om satire, musik og fællesskab</h2>
-			<p>
-				NAT Revyen er en studenterdrevet forening på SDU, hvor omkring 30 engagerede
-				studerende hvert år skaber en revy fyldt med sketches, sange og scenografi.
-				Vi arbejder sammen på tværs af studieretninger og opfører forestillingen
-				i Studenterhuset Odense den første weekend i oktober.
-			</p>
-			<img src="images/logoNAT.svg" alt="NAT REVY logo" class="about-logo">
-		</div>
-
-		<div class="about-images">
-			<img src="images/dyt-baat.jpg" alt="Revy forestilling">
-			<img src="images/group.jpg" alt="Revy fællesskab">
-		</div>
+	<div class="about-images">
+	  <img src="images/dyt-baat.jpg" alt="Revy forestilling">
+	  <img src="images/group.jpg" alt="Revy fællesskab">
 	</div>
-</section>
+      </div>
+    </section>
 
-<!-- Footer placeholder -->
-<div id="footer"></div>
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
 
-<script>
-	// Load navbar from external file
-	fetch("navbar.html")
-		.then(response => response.text())
-		.then(data => {
-			document.getElementById("navbar").innerHTML = data;
+    <script>
+      // Load navbar from external file
+      fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+	document.getElementById("navbar").innerHTML = data;
 
-			// Initialize hamburger menu
-			const hamburger = document.getElementById("hamburger");
-			const mobileMenu = document.getElementById("mobileMenu");
+	// Initialize hamburger menu
+	const hamburger = document.getElementById("hamburger");
+	const mobileMenu = document.getElementById("mobileMenu");
 
-			if (hamburger && mobileMenu) {
-				hamburger.addEventListener("click", () => {
-					mobileMenu.classList.toggle("active");
-				});
-			}
-		});
+	if (hamburger && mobileMenu) {
+	    hamburger.addEventListener("click", () => {
+		mobileMenu.classList.toggle("active");
+	    });
+	}
+    });
 
-	// Load footer from external file
-	fetch("footer.html")
-		.then(response => response.text())
-		.then(data => {
-			document.getElementById("footer").innerHTML = data;
-		});
-</script>
+      // Load footer from external file
+      fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+	document.getElementById("footer").innerHTML = data;
+    });
+    </script>
 
-</body>
+  </body>
 </html>
