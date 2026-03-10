@@ -1,11 +1,11 @@
 :root {
-    --bg-dark: #17042b;
+    --bg-dark: #2c1b4c;
     --bg-gradient: linear-gradient(135deg, #2d1b4e 0%, #1a0f2e 100%);
     --text: #fff;
     --text-dim: rgba(255, 255, 255, 0.75);
     --purple: #da0a91;
     --pink: #3a096c;
-    --pink-light: #0fa6dd;
+    --pink-light: #d817b8;
     --border: rgba(255, 255, 255, 0.1);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     --transition: 0.25s ease;
@@ -58,13 +58,42 @@ a:hover { color: #e89fff; }
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all var(--transition);
+}
+
+.logo:hover,
+.logo:focus-visible {
+    background: rgba(171, 80, 255, 0.15);
+    border-color: rgba(171, 80, 255, 0.35);
+}
+
+.logo-text {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+    line-height: 1;
+}
+
+.logo:hover .logo-text,
+.logo:focus-visible .logo-text { color: var(--text); }
+
 .logo img {
     height: 65px;
     display: block;
     transition: transform var(--transition), filter var(--transition);
 }
 
-.logo img:hover {
+.logo:hover img,
+.logo:focus-visible img {
     transform: scale(1.08);
     filter: drop-shadow(0 4px 12px rgba(171, 80, 255, 0.4));
 }
@@ -426,4 +455,3 @@ a:hover { color: #e89fff; }
         max-width: 200px;
     }
 }
-
