@@ -398,6 +398,16 @@ a {
     border-color: #3b5998;
 }
 
+.instagram-btn {
+    background: rgba(193, 53, 132, 0.2);
+    border-color: rgba(193, 53, 132, 0.45);
+}
+
+.instagram-btn:hover {
+    background: rgba(225, 48, 108, 0.35);
+    border-color: rgba(225, 48, 108, 0.7);
+}
+
 .social-btn svg { display: inline-block; }
 
 .mobile-menu {
@@ -437,7 +447,8 @@ a {
 
 .gallery-header {
     max-width: 760px;
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
 }
 
 .gallery-header h2 {
@@ -451,6 +462,8 @@ a {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text);
+    max-width: 60ch;
+    margin: 0 auto;
 }
 
 .gallery-grid {
