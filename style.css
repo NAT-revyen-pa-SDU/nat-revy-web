@@ -1,11 +1,10 @@
 :root {
     --bg-dark: #2c1b4c;
     --bg-gradient: linear-gradient(135deg, #2d1b4e 0%, #1a0f2e 100%);
-    --text: #fff;
+    --text: #ffdbfd;
     --cta-text: #1b0123;
     --cta-bg: #db9fff;
     --cta-hover-bg: #ffffff;
-    --text-dim: rgba(255, 255, 255, 0.75);
     --purple: #da0a91;
     --pink: #3a096c;
     --border: rgba(255, 255, 255, 0.1);
@@ -88,8 +87,8 @@ a {
 .logo img {
     height: 85px;
     display: block;
-    margin-top: -15px;
-    margin-bottom: -15px;
+    margin-top: -10px;
+    margin-bottom: -10px;
     transition: transform var(--transition), filter var(--transition);
 }
 
@@ -157,7 +156,7 @@ a {
 
 .btn-disabled {
     background: rgba(255, 255, 255, 0.08);
-    color: var(--text-dim);
+    color: var(--text);
     border: 1px solid var(--border);
     padding: 0.6rem 1.6rem;
     min-height: 52px;
@@ -275,7 +274,7 @@ a {
 .about-text-wrapper p {
     font-size: 1.15rem;
     line-height: 1.7;
-    color: var(--text-dim);
+    color: var(--text);
 }
 
 .about-images {
@@ -327,7 +326,7 @@ a {
 }
 
 .footer {
-    background: rgba(5, 2, 12, 0.25);
+    background: rgba(27, 11, 60, 0.25);
     backdrop-filter: blur(12px);
     border-top: 1px solid rgba(171, 80, 255, 0.2);
     color: var(--purple);
@@ -360,7 +359,7 @@ a {
 }
 
 .footer-brand p {
-    color: var(--text-dim);
+    color: var(--text);
     font-size: 0.95rem;
     margin: 0;
 }
