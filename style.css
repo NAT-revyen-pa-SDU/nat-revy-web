@@ -6,7 +6,7 @@
     --cta-bg: #db9fff;
     --cta-hover-bg: #ffffff;
     --purple: #da0a91;
-    --pink: #3a096c;
+    --pink: #50096c;
     --border: rgba(255, 255, 255, 0.1);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     --transition: 0.25s ease;
@@ -317,7 +317,7 @@ a {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--pink), var(--cta-hover-bg));
+    background: linear-gradient(135deg, var(--pink), #ba2be2);
     padding: 0.2rem 0.6rem;
     border-radius: 8px;
     color: var(--text);
