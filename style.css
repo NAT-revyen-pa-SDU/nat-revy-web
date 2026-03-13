@@ -4,10 +4,10 @@
     --text: #fff;
     --cta-text: #1b0123;
     --cta-bg: #db9fff;
+    --cta-hover-bg: #ffffff;
     --text-dim: rgba(255, 255, 255, 0.75);
     --purple: #da0a91;
     --pink: #3a096c;
-    --pink-light: #d817b8;
     --border: rgba(255, 255, 255, 0.1);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     --transition: 0.25s ease;
@@ -86,8 +86,10 @@ a {
 .logo:focus-visible .logo-text { color: var(--text); }
 
 .logo img {
-    height: 65px;
+    height: 85px;
     display: block;
+    margin-top: -15px;
+    margin-bottom: -15px;
     transition: transform var(--transition), filter var(--transition);
 }
 
@@ -148,7 +150,7 @@ a {
 }
 
 .btn-cta:hover {
-    background: var(--pink-light);
+    background: var(--cta-hover-bg);
     transform: translateY(-2px);
     color: var(--cta-text);
 }
@@ -316,7 +318,7 @@ a {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--pink), var(--pink-light));
+    background: linear-gradient(135deg, var(--pink), var(--cta-hover-bg));
     padding: 0.2rem 0.6rem;
     border-radius: 8px;
     color: var(--text);
