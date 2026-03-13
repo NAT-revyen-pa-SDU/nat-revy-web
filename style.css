@@ -94,7 +94,6 @@ a {
 
 .logo:hover img,
 .logo:focus-visible img {
-    transform: scale(1.08);
     filter: drop-shadow(0 4px 12px rgba(171, 80, 255, 0.4));
 }
 
@@ -103,13 +102,7 @@ a {
     margin: 0 auto 2rem;
     max-width: 150px;
     height: auto;
-    transition: transform var(--transition), filter var(--transition);
     cursor: pointer;
-}
-
-.about-logo:hover {
-    transform: scale(1.08);
-    filter: drop-shadow(0 4px 12px rgba(171, 80, 255, 0.4));
 }
 
 .nav-links {
@@ -287,15 +280,8 @@ a {
     width: 100%;
     border-radius: var(--radius);
     object-fit: cover;
-    transition: all 0.3s ease;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
-}
-
-.about-images img:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    border-color: rgba(171, 80, 255, 0.2);
 }
 
 .about-om-os {
@@ -439,10 +425,63 @@ a {
 
 .mobile-menu a:not(.btn-cta):hover { background: rgba(171, 80, 255, 0.15); }
 
+.gallery-page {
+    background: var(--bg-gradient);
+    padding: 120px 2rem 4rem;
+}
+
+.gallery-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-header {
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+}
+
+.gallery-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 100%;
+    margin-bottom: 1rem;
+    color: var(--purple);
+}
+
+.gallery-header p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.gallery-grid figure {
+    margin: 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.gallery-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
 @media (max-width: 1000px) {
     .nav-links { display: none; }
     .hamburger { display: block; }
     .about-inner { grid-template-columns: 1fr; }
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .footer-inner {
         flex-direction: column;
         text-align: center;
@@ -455,4 +494,8 @@ a {
         flex: 1;
         max-width: 200px;
     }
+}
+
+@media (max-width: 680px) {
+    .gallery-grid { grid-template-columns: 1fr; }
 }
