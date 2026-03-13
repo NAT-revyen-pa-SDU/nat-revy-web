@@ -302,13 +302,94 @@ a {
     z-index: 2;
 }
 
-.highlight {
-    background: linear-gradient(135deg, var(--pink), #ba2be2);
-    padding: 0.2rem 0.6rem;
-    border-radius: 8px;
+.roles {
+    background: var(--bg-gradient);
+    padding: 1rem 2rem 5rem;
+}
+
+.roles-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.roles-header {
+    max-width: 760px;
+    margin-bottom: 2rem;
+}
+
+.roles-header h2 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 0.9rem;
+    color: var(--purple);
+}
+
+.roles-header p {
     color: var(--text);
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.role-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.1rem;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.role-card-featured {
+    background: linear-gradient(135deg, rgba(218, 10, 145, 0.2), rgba(80, 9, 108, 0.22));
+    border-color: rgba(218, 10, 145, 0.55);
+}
+
+.role-card-featured:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.role-card h3 {
+    color: var(--purple);
+    font-size: 1.1rem;
+    margin-bottom: 0.55rem;
+}
+
+.role-card p {
+    color: var(--text);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.role-card-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.9rem;
+}
+
+.role-card-cta-prominent {
+    background: linear-gradient(135deg, rgba(218, 10, 145, 0.26), rgba(80, 9, 108, 0.32));
+    border-color: rgba(218, 10, 145, 0.7);
+    padding: 1.4rem;
+    grid-column: span 2;
+}
+
+.role-card-cta-prominent h3 {
+    font-size: 1.3rem;
+    color: var(--text);
+}
+
+.role-card-cta-prominent .btn-cta {
+    font-size: 1.02rem;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
 }
 
 .footer {
@@ -398,6 +479,16 @@ a {
     border-color: #3b5998;
 }
 
+.instagram-btn {
+    background: rgba(193, 53, 132, 0.2);
+    border-color: rgba(193, 53, 132, 0.45);
+}
+
+.instagram-btn:hover {
+    background: rgba(225, 48, 108, 0.35);
+    border-color: rgba(225, 48, 108, 0.7);
+}
+
 .social-btn svg { display: inline-block; }
 
 .mobile-menu {
@@ -437,7 +528,8 @@ a {
 
 .gallery-header {
     max-width: 760px;
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
 }
 
 .gallery-header h2 {
@@ -451,6 +543,8 @@ a {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text);
+    max-width: 60ch;
+    margin: 0 auto;
 }
 
 .gallery-grid {
@@ -479,6 +573,8 @@ a {
     .nav-links { display: none; }
     .hamburger { display: block; }
     .about-inner { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .role-card-cta-prominent { grid-column: span 2; }
     .gallery-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -497,5 +593,8 @@ a {
 }
 
 @media (max-width: 680px) {
+    .roles { padding: 1rem 1rem 4rem; }
+    .roles-grid { grid-template-columns: 1fr; }
+    .role-card-cta-prominent { grid-column: auto; }
     .gallery-grid { grid-template-columns: 1fr; }
 }
