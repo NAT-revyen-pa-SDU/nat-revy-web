@@ -1,6 +1,6 @@
 :root {
     --bg-dark: #2c1b4c;
-    --bg-gradient: linear-gradient(135deg, #2d1b4e 0%, #1a0f2e 100%);
+    --bg-gradient: linear-gradient(to bottom, #2d1b4e 0%, #1a0f2e 100%);
     --text: #ffdbfd;
     --cta-text: #1b0123;
     --cta-bg: #db9fff;
@@ -209,7 +209,7 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(122, 33, 83, 0.4), rgba(171, 80, 255, 0.35));
+    background: linear-gradient(to bottom, rgb(45, 27, 77), rgba(216, 23, 184, 0.47));
 }
 
 .hero-content {
