@@ -1,96 +1,91 @@
 <!DOCTYPE html>
 <html lang="da">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Om os - NAT Revyen</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <!-- Navbar placeholder -->
-    <div id="navbar"></div>
+<div id="navbar"></div>
 
-    <!-- CONTENT -->
-    <section class="about about-om-os" style="padding-top:120px;">
-      <div class="about-inner">
-	<div class="about-text-wrapper">
-	  <h2>Historie</h2>
-	  <p>
-	    NAT-revyen stiftet i efteråret 2023 af Rebecka Birk Jensen. Rebecka ville gerne starte et
-	    socialt fællesskab med fokus på kreativ udfoldelse på det naturfaglige fakultet.
-	    Der blev derfor holdt stiftende generalforsamling den 29. november 2023. Således
-	    startede den første revy-sæson i NAT-revyen, som kulminerede med forestillingen
-	    <strong class="highlight">Kald det NAT-REVY</strong>.
-	  </p>
+<section class="about about-om-os">
+    <div class="about-inner">
+        <div class="about-text-wrapper">
+            <h2>Historie</h2>
+            <p>
+                NAT-revyen stiftet i efteråret 2023 af Rebecka Birk Jensen. Rebecka ville gerne starte et
+                socialt fællesskab med fokus på kreativ udfoldelse på det naturfaglige fakultet.
+                Der blev derfor holdt stiftende generalforsamling den 29. november 2023. Således
+                startede den første revy-sæson i NAT-revyen, som kulminerede med forestillingen:
+                <br>
+                <strong class="highlight">Kald det NAT-REVY</strong>.
+            </p>
 
-	  <h2 style="margin-top: 3rem;">Foreningen</h2>
-	  <p>
-	    I dag har NAT-revyen ca. 30 medlemmer, primært fra de naturvidenskablige uddannelser på SDU.
-	    Vi har et livligt socialt fællesskab i foreningen, og mødes til sociale arrangementer 2-3 gange
-	    hver måned (lidt mindre i ferie- og eksamensperioder).
+            <h2>Foreningen</h2>
+            <p>
+                I dag har NAT-revyen ca. 30 medlemmer, primært fra de naturvidenskablige uddannelser på SDU.
+                Vi har et livligt socialt fællesskab i foreningen, og mødes til sociale arrangementer 2-3 gange
+                hver måned (lidt mindre i ferie- og eksamensperioder).
 
-	    Vi er en frivillig forening af studerende, og vi er afhængige af donationer, sponsorater og
-	    frivilligt arbejde for at vi kan leje lokaler, lave kostumer og hyre en lydmand til vores forestillinger.
-	  </p>
+                Vi er en frivillig forening af studerende, og vi er afhængige af donationer, sponsorater og
+                frivilligt arbejde for at vi kan leje lokaler, lave kostumer og hyre en lydmand til vores
+                forestillinger.
+            </p>
 
-	  <h2 style="margin-top: 3rem; font-size: 1.5rem;">Hjemmesiden</h2>
-	  <p style="font-size: 0.95rem;">
-	    Hjemmesiden hostes gennem Github Pages. Kildekoden er åben og kan findes
-	    <a href="https://github.com/NAT-revyen-pa-SDU/nat-revy-web" target="_blank">her</a>.
-	  </p>
-	</div>
+            <h3>Hjemmesiden</h3>
+            <p>
+                Hjemmesiden hostes gennem Github Pages. Kildekoden er åben og kan findes
+                <a href="https://github.com/NAT-revyen-pa-SDU/nat-revy-web" target="_blank">her</a>.
+            </p>
+        </div>
 
-	<div class="about-images">
-	  <img src="images/group.jpg" alt="Revy fællesskab">
-	  <img src="images/bolo.jpg" alt="Revy forestilling">
-	</div>
-      </div>
-    </section>
+        <div class="about-images">
+            <img src="images/group.jpg" alt="Revy fællesskab">
+            <img src="images/bolo.jpg" alt="Revy forestilling">
+        </div>
+    </div>
+</section>
 
-    <!-- Footer placeholder -->
-    <div id="footer"></div>
+<div id="footer"></div>
 
-    <!-- Navbar and Footer loader script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-	  // Load navbar
-	  fetch("navbar.html")
-	      .then(response => response.text())
-	      .then(data => {
-		  document.getElementById("navbar").innerHTML = data;
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
 
-		  // Reattach hamburger menu
-		  const hamburger = document.getElementById("hamburger");
-		  const mobileMenu = document.getElementById("mobileMenu");
+                const hamburger = document.getElementById("hamburger");
+                const mobileMenu = document.getElementById("mobileMenu");
 
-		  if (hamburger) {
-		      hamburger.addEventListener("click", () => {
-			  mobileMenu.classList.toggle("active");
-		      });
-		  }
+                if (hamburger) {
+                    hamburger.addEventListener("click", () => {
+                        mobileMenu.classList.toggle("active");
+                    });
+                }
 
-		  // Highlight active page
-		  const links = document.querySelectorAll('.nav-links a');
-		  links.forEach(link => {
-		      if (link.textContent.trim().toLowerCase() === 'om os') {
-			  link.classList.add('active');
-		      }
-		  });
-	      });
+                const links = document.querySelectorAll('.nav-links a');
+                links.forEach(link => {
+                    if (link.textContent.trim().toLowerCase() === 'om os') {
+                        link.classList.add('active');
+                    }
+                });
+            });
 
-	  // Load footer
-	  fetch("footer.html")
-	      .then(response => response.text())
-	      .then(data => {
-		  document.getElementById("footer").innerHTML = data;
-	      });
-      });
-    </script>
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    });
+</script>
 
-  </body>
+</body>
 </html>
