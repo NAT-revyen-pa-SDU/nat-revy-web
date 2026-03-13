@@ -302,6 +302,140 @@ a {
     z-index: 2;
 }
 
+.about-page-layout {
+    align-items: start;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 2rem;
+}
+
+.about-page-copy {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.about-page-intro,
+.about-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.about-page-kicker {
+    display: inline-flex;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(218, 10, 145, 0.16);
+    border: 1px solid rgba(218, 10, 145, 0.28);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.about-page-intro h2 {
+    font-size: clamp(2.3rem, 4.8vw, 4.2rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: var(--purple);
+}
+
+.about-page-intro p {
+    color: var(--text);
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.about-card-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.about-card h3 {
+    margin-bottom: 0.85rem;
+    color: var(--purple);
+    font-size: 1.35rem;
+}
+
+.about-card p + p {
+    margin-top: 1rem;
+}
+
+.about-page-media {
+    max-width: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.about-page-media img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+}
+
+.contact-page {
+    padding: 120px 2rem 5rem;
+}
+
+.contact-layout {
+    align-items: center;
+}
+
+.contact-simple {
+    max-width: 680px;
+}
+
+.contact-panel {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.1rem;
+    padding: 1.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 20rem;
+}
+
+.contact-item h3 {
+    margin: 0 0 0.45rem;
+    color: var(--purple);
+    font-size: 1.1rem;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    transition: color var(--transition), border-color var(--transition);
+}
+
+.contact-link:hover {
+    color: var(--cta-bg);
+    border-color: var(--cta-bg);
+}
+
+.contact-panel .btn-cta {
+    justify-self: start;
+    margin-top: 0.35rem;
+}
+
+.contact-media {
+    max-width: 420px;
+    width: 100%;
+}
+
+.contact-media img {
+    min-height: 320px;
+}
+
 .roles {
     background: var(--bg-gradient);
     padding: 1rem 2rem 5rem;
@@ -315,6 +449,7 @@ a {
 .roles-header {
     max-width: 760px;
     margin-bottom: 2rem;
+    text-align: left;
 }
 
 .roles-header h2 {
@@ -351,7 +486,6 @@ a {
 }
 
 .role-card-featured:hover {
-    transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
@@ -573,6 +707,7 @@ a {
     .nav-links { display: none; }
     .hamburger { display: block; }
     .about-inner { grid-template-columns: 1fr; }
+    .about-page-layout { grid-template-columns: 1fr; }
     .roles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .role-card-cta-prominent { grid-column: span 2; }
     .gallery-grid {
@@ -593,6 +728,12 @@ a {
 }
 
 @media (max-width: 680px) {
+    .about-page-intro,
+    .about-card { padding: 1.25rem; }
+    .about-page-media { grid-template-columns: 1fr; }
+    .contact-page { padding: 120px 1rem 4rem; }
+    .contact-panel { padding: 1.2rem; }
+    .contact-media img { min-height: 240px; }
     .roles { padding: 1rem 1rem 4rem; }
     .roles-grid { grid-template-columns: 1fr; }
     .role-card-cta-prominent { grid-column: auto; }

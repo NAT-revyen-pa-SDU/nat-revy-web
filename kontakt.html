@@ -1,83 +1,84 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kontakt - NAT Revyen</title>
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - NAT Revyen</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Navbar placeholder -->
 <div id="navbar"></div>
 
-<!-- CONTENT -->
-<section class="about" style="padding-top: 120px;">
-	<div class="about-inner">
-		<div class="about-text-wrapper">
-			<h2>Kontakt</h2>
-			<p>
-				Har du spørgsmål til NAT Revyen eller ønsker at blive medlem?
-			</p>
-			<p>
-				<strong>E-mail:</strong> <a href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a>
-			</p>
-			<p>
-				<strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61552933400622" target="_blank">NAT Revyen</a>
-			</p>
-			<p>
-				<strong>Tilmelding:</strong> <a href="https://sdusnatrevy.nemtilmeld.dk/" target="_blank">NemTilmeld</a>
-			</p>
-		</div>
+<section class="about contact-page">
+    <div class="about-inner contact-layout">
+        <div class="about-text-wrapper contact-simple">
+            <h2>Kontakt NAT Revyen</h2>
+            <p>Har du spørgsmål til NAT Revyen, eller vil du gerne være med? Skriv til os eller hop direkte videre til
+                tilmelding.</p>
 
-		<div class="about-images">
-			<img src="images/group.jpg" alt="NAT Revy gruppe">
-			<img src="images/social.jpg" alt="NAT Revy arrangement">
-		</div>
-	</div>
+            <div class="contact-panel">
+                <div class="contact-item">
+                    <h3>Tilmelding</h3>
+                    <a class="contact-link" href="https://sdusnatrevy.nemtilmeld.dk/" target="_blank"
+                       rel="noopener noreferrer">Gå til NemTilmeld</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Spørgsmål</h3>
+                    <a class="contact-link" href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a>
+                </div>
+
+                <div class="contact-item">
+                    <h3>Facebook</h3>
+                    <a class="contact-link" href="https://www.facebook.com/profile.php?id=61552933400622"
+                       target="_blank" rel="noopener noreferrer">Besøg vores Facebook</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-images contact-media">
+            <img src="images/group.jpg" alt="NAT Revy gruppe">
+        </div>
+    </div>
 </section>
 
-<!-- Footer placeholder -->
 <div id="footer"></div>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		// Load navbar
-		fetch("navbar.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("navbar").innerHTML = data;
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
 
-				// Reattach hamburger menu
-				const hamburger = document.getElementById("hamburger");
-				const mobileMenu = document.getElementById("mobileMenu");
+                const hamburger = document.getElementById("hamburger");
+                const mobileMenu = document.getElementById("mobileMenu");
 
-				if (hamburger) {
-					hamburger.addEventListener("click", () => {
-						mobileMenu.classList.toggle("active");
-					});
-				}
+                if (hamburger) {
+                    hamburger.addEventListener("click", () => {
+                        mobileMenu.classList.toggle("active");
+                    });
+                }
 
-				// Highlight active page
-				const links = document.querySelectorAll('.nav-links a');
-				links.forEach(link => {
-					if (link.textContent.trim().toLowerCase() === 'kontakt') {
-						link.classList.add('active');
-					}
-				});
-			});
+                const links = document.querySelectorAll('.nav-links a');
+                links.forEach(link => {
+                    if (link.textContent.trim().toLowerCase() === 'kontakt') {
+                        link.classList.add('active');
+                    }
+                });
+            });
 
-		// Load footer
-		fetch("footer.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("footer").innerHTML = data;
-			});
-	});
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    });
 </script>
 
 </body>
 </html>
-
