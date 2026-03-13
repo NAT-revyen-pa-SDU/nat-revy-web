@@ -10,39 +10,67 @@
 </head>
 <body>
 
-<!-- Navbar placeholder -->
 <div id="navbar"></div>
 
-<!-- CONTENT -->
-<section class="about" style="padding-top: 120px;">
-	<div class="about-inner">
-		<div class="about-text-wrapper">
+<section class="gallery-page">
+	<div class="gallery-inner">
+		<div class="gallery-header">
 			<h2>Galleri</h2>
 			<p>
-				Her finder du billeder fra vores forestillinger og sociale arrangementer.
-				Besøg vores Facebook-side for mere indhold!
+				Her finder du et lille udklip af billeder fra forestillinger, intense oeveuger og sociale arrangementer i NAT Revyen.
 			</p>
 		</div>
 
-		<div class="about-images">
-			<img src="images/group.jpg" alt="NAT Revy gruppe">
-			<img src="images/social.jpg" alt="NAT Revy arrangement">
+		<div class="gallery-grid">
+			<figure>
+				<img src="images/slutsang_large.jpg" alt="Slutsang på scenen" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/group.jpg" alt="Hele holdet samlet" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/intensuge.jpg" alt="Intensuge med øvelser" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/dyt-baat.jpg" alt="Sketch fra forestilling" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/social.jpg" alt="Social hygge i foreningen" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/startsang.jpg" alt="Startsang på scenen" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/sommerfesthygge.jpg" alt="Sommerfest" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/telephonos.jpg" alt="Nummer fra revyen" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/bolo.jpg" alt="Scene fra forestilling" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/intens2.jpg" alt="Revyhold under øvelse" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/elonkeld.jpg" alt="Skuespiller på scenen" loading="lazy">
+			</figure>
+			<figure>
+				<img src="images/klap.jpg" alt="Publikum klapper" loading="lazy">
+			</figure>
 		</div>
 	</div>
 </section>
 
-<!-- Footer placeholder -->
 <div id="footer"></div>
 
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
-		// Load navbar
 		fetch("navbar.html")
 			.then(response => response.text())
 			.then(data => {
 				document.getElementById("navbar").innerHTML = data;
 
-				// Reattach hamburger menu
 				const hamburger = document.getElementById("hamburger");
 				const mobileMenu = document.getElementById("mobileMenu");
 
@@ -52,7 +80,6 @@
 					});
 				}
 
-				// Highlight active page
 				const links = document.querySelectorAll('.nav-links a');
 				links.forEach(link => {
 					if (link.textContent.trim().toLowerCase() === 'galleri') {
@@ -61,7 +88,6 @@
 				});
 			});
 
-		// Load footer
 		fetch("footer.html")
 			.then(response => response.text())
 			.then(data => {
