@@ -497,19 +497,19 @@ a {
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
 }
 
+.role-card-head {
+    margin-bottom: 0.7rem;
+}
+
 .role-card-featured {
     background: linear-gradient(135deg, rgba(218, 10, 145, 0.2), rgba(80, 9, 108, 0.22));
     border-color: rgba(218, 10, 145, 0.55);
 }
 
-.role-card-featured:hover {
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-}
-
 .role-card h3 {
     color: var(--purple);
     font-size: 1.1rem;
-    margin-bottom: 0.55rem;
+    margin-bottom: 0;
 }
 
 .role-card p {

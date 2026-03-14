@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>NAT REVY</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"/>
 </head>
 <script>
@@ -73,27 +72,39 @@
 
         <div class="roles-grid">
             <article class="role-card role-card-featured">
-                <h3>Band</h3>
+                <div class="role-card-head">
+                    <h3>Band</h3>
+                </div>
                 <p>Spil live musik til forestillingen og vær med til at skabe stemningen</p>
             </article>
             <article class="role-card role-card-featured">
-                <h3>Skuespiller</h3>
+                <div class="role-card-head">
+                    <h3>Skuespiller</h3>
+                </div>
                 <p>Stå på scenen, spil karakterer og formidl sketches med energi</p>
             </article>
             <article class="role-card">
-                <h3>Instruktør</h3>
+                <div class="role-card-head">
+                    <h3>Instruktør</h3>
+                </div>
                 <p>Hjælp med iscenesættelse, timing og at samle numrene til en helhed</p>
             </article>
             <article class="role-card">
-                <h3>Sketch-skriver</h3>
+                <div class="role-card-head">
+                    <h3>Sketch-skriver</h3>
+                </div>
                 <p>Skriv satire, punchlines og idéer, som bliver til revynumre</p>
             </article>
             <article class="role-card">
-                <h3>Backstage</h3>
+                <div class="role-card-head">
+                    <h3>Backstage</h3>
+                </div>
                 <p>Hold styr på rekvisitter, skift og afvikling bag scenen</p>
             </article>
             <article class="role-card">
-                <h3>Scenografi og kostume</h3>
+                <div class="role-card-head">
+                    <h3>Scenografi og kostume</h3>
+                </div>
                 <p>Design visuelle udtryk, kulisser og kostumer, der løfter forestillingen</p>
             </article>
             <article class="role-card role-card-cta role-card-cta-prominent">
@@ -114,7 +125,6 @@
         .then(data => {
             document.getElementById("navbar").innerHTML = data;
 
-            // Initialize hamburger menu
             const hamburger = document.getElementById("hamburger");
             const mobileMenu = document.getElementById("mobileMenu");
 
@@ -125,7 +135,6 @@
             }
         });
 
-    // Load footer from external file
     fetch("footer.html")
         .then(response => response.text())
         .then(data => {
