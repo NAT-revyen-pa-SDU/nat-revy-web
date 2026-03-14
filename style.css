@@ -185,7 +185,10 @@ a {
     transition: color 0.15s ease;
 }
 
-.hamburger:hover { color: var(--purple); }
+.hamburger:hover {
+    color: var(--purple);
+    border-color: rgba(171, 80, 255, 0.35);
+}
 
 .hero {
     height: 100vh;
@@ -378,19 +381,29 @@ a {
 }
 
 .contact-page {
-    padding: 120px 2rem 5rem;
+    padding: 140px 2rem 5rem;
 }
 
 .contact-layout {
+    grid-template-columns: minmax(0, 680px);
+    justify-content: center;
     align-items: center;
 }
 
 .contact-simple {
     max-width: 680px;
+    margin: 0 auto;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+.contact-simple h2 {
+    margin-top: 0.5rem;
 }
 
 .contact-panel {
-    margin-top: 2rem;
+    margin: 2rem auto 0;
     display: grid;
     gap: 1.1rem;
     padding: 1.4rem;
@@ -398,7 +411,11 @@ a {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    max-width: 20rem;
+    width: min(100%, 20rem);
+}
+
+.contact-item {
+    text-align: left;
 }
 
 .contact-item h3 {
@@ -646,13 +663,17 @@ a {
     border-radius: 8px;
     transition: all var(--transition);
     text-decoration: none;
+    border: 1px solid rgba(171, 80, 255, 0.3);
 }
 
-.mobile-menu a:not(.btn-cta):hover { background: rgba(171, 80, 255, 0.15); }
+.mobile-menu a:not(.btn-cta):hover {
+    background: rgba(171, 80, 255, 0.15);
+    border-color: rgba(171, 80, 255, 0.35);
+}
 
 .gallery-page {
     background: var(--bg-gradient);
-    padding: 120px 2rem 4rem;
+    padding: 140px 2rem 4rem;
 }
 
 .gallery-inner {
@@ -731,7 +752,8 @@ a {
     .about-page-intro,
     .about-card { padding: 1.25rem; }
     .about-page-media { grid-template-columns: 1fr; }
-    .contact-page { padding: 120px 1rem 4rem; }
+    .contact-page { padding: 132px 1rem 4rem; }
+    .gallery-page { padding: 132px 1rem 4rem; }
     .contact-panel { padding: 1.2rem; }
     .contact-media img { min-height: 240px; }
     .roles { padding: 1rem 1rem 4rem; }
