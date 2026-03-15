@@ -8,22 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"/>
 </head>
-<script>
-    fetch("navbar.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("navbar").innerHTML = data;
-
-            const hamburger = document.getElementById("hamburger");
-            const mobileMenu = document.getElementById("mobileMenu");
-
-            if (hamburger) {
-                hamburger.addEventListener("click", () => {
-                    mobileMenu.classList.toggle("active");
-                });
-            }
-        });
-</script>
 <body>
 
 <div id="navbar"></div>
@@ -31,14 +15,8 @@
 <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <br>
-        <br>
         <h1>NAT-Revy</h1>
-        <br>
-        <br>
         <h2>Studenterdrevet revy på SDU</h2>
-        <br>
-        <br>
         <a href="tilmeld.html" class="btn-cta">Bliv Medlem</a>
     </div>
 </section>
@@ -73,15 +51,15 @@
         <div class="roles-grid">
             <article class="role-card role-card-featured">
                 <div class="role-card-head">
-                    <h3>Band</h3>
-                </div>
-                <p>Spil live musik til forestillingen og vær med til at skabe stemningen</p>
-            </article>
-            <article class="role-card role-card-featured">
-                <div class="role-card-head">
                     <h3>Skuespiller</h3>
                 </div>
                 <p>Stå på scenen, spil karakterer og formidl sketches med energi</p>
+            </article>
+            <article class="role-card role-card-featured">
+                <div class="role-card-head">
+                    <h3>Band</h3>
+                </div>
+                <p>Spil live musik til forestillingen og vær med til at skabe stemningen</p>
             </article>
             <article class="role-card">
                 <div class="role-card-head">
@@ -110,36 +88,31 @@
             <article class="role-card role-card-cta role-card-cta-prominent">
                 <h3>Klar til at være med?</h3>
                 <p>Der er mange måder at bidrage på - find din plads i holdet</p>
-                <a href="tilmeld.html" class="btn-cta">Bliv medlem</a>
+                <a href="tilmeld.html" class="btn-cta">Bliv Medlem</a>
             </article>
         </div>
     </div>
 </section>
 
-
 <div id="footer"></div>
 
 <script>
-    fetch("navbar.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("navbar").innerHTML = data;
+    document.addEventListener("DOMContentLoaded", async () => {
+        const navbarResponse = await fetch("navbar.html");
+        document.getElementById("navbar").innerHTML = await navbarResponse.text();
 
-            const hamburger = document.getElementById("hamburger");
-            const mobileMenu = document.getElementById("mobileMenu");
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
 
-            if (hamburger && mobileMenu) {
-                hamburger.addEventListener("click", () => {
-                    mobileMenu.classList.toggle("active");
-                });
-            }
-        });
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener("click", () => {
+                mobileMenu.classList.toggle("active");
+            });
+        }
 
-    fetch("footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer").innerHTML = data;
-        });
+        const footerResponse = await fetch("footer.html");
+        document.getElementById("footer").innerHTML = await footerResponse.text();
+    });
 </script>
 
 </body>
