@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Køb billetter - NAT Revyen</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<section class="about contact-page">
+    <div class="about-inner contact-layout">
+        <div class="about-text-wrapper contact-simple">
+            <p class="ticket-kicker">Årets forestilling · Billetterne er sat til salg</p>
+            <h2>Køb billetter</h2>
+            <p>Vælg den forestilling, der passer dig. Vi glæder os til at se dig i Studenterhuset Odense</p>
+
+            <div class="contact-panel ticket-panel">
+                <a class="contact-link ticket-link" href="https://event-link.dk/arrangement/60722/" target="_blank" rel="noopener noreferrer">
+                    <span><strong>1/10</strong><small>Kl. 19-22</small></span>
+                    <span>Vælg billetter</span>
+                </a>
+                <a class="contact-link ticket-link" href="https://event-link.dk/arrangement/60724/" target="_blank" rel="noopener noreferrer">
+                    <span><strong>2/10</strong><small>Kl. 19-22</small></span>
+                    <span>Vælg billetter</span>
+                </a>
+                <a class="contact-link ticket-link" href="https://event-link.dk/arrangement/60725/" target="_blank" rel="noopener noreferrer">
+                    <span><strong>3/10</strong><small>Kl. 14-17</small></span>
+                    <span>Vælg billetter</span>
+                </a>
+                <a class="contact-link ticket-link" href="https://event-link.dk/arrangement/60726/" target="_blank" rel="noopener noreferrer">
+                    <span><strong>3/10</strong><small>Kl. 19-22</small></span>
+                    <span>Vælg billetter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="footer"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const mobileMenu = document.getElementById("mobileMenu");
+
+                if (hamburger) {
+                    hamburger.addEventListener("click", () => {
+                        mobileMenu.classList.toggle("active");
+                    });
+                }
+
+                const links = document.querySelectorAll('.nav-links a');
+                links.forEach(link => {
+                    if (link.textContent.trim().toLowerCase() === 'køb billet') {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    });
+</script>
+
+</body>
+</html>
