@@ -274,7 +274,6 @@ a {
     min-width: min(100%, 24rem);
     min-height: 68px;
     padding: 1.05rem 2.2rem;
-    border: 2px solid var(--cta-bg);
     font-size: 1.18rem;
     font-weight: 800;
     letter-spacing: 0.01em;
