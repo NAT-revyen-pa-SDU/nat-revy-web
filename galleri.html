@@ -4,18 +4,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Galleri - NAT Revyen</title>
+	<meta name="description" content="Billeder fra NAT Revyens forestillinger, intense øveuger og sociale arrangementer.">
+	<meta name="theme-color" content="#14032f">
 	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+	<link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="navbar"></div>
 
-<section class="gallery-page">
+<main id="indhold" class="gallery-page">
 	<div class="gallery-inner">
 		<div class="gallery-header">
-			<h2>Galleri</h2>
+			<h1>Galleri</h1>
 			<p>
 				Her finder du et lille udklip af billeder fra forestillinger, intense øveuger og sociale arrangementer i NAT Revyen
 			</p>
@@ -23,77 +29,96 @@
 
 		<div class="gallery-grid">
 			<figure>
-				<img src="images/slutsang_large.jpg" alt="Slutsang på scenen" loading="lazy">
+				<a href="images/web/slutsang-large-1600.webp"><img src="images/web/slutsang-large-800.webp" alt="Slutsang på scenen"></a>
 			</figure>
 			<figure>
-				<img src="images/group.jpg" alt="Hele holdet samlet" loading="lazy">
+				<a href="images/web/group-1600.webp"><img src="images/web/group-800.webp" alt="Hele holdet samlet"></a>
 			</figure>
 			<figure>
-				<img src="images/intensuge.jpg" alt="Intensuge med øvelser" loading="lazy">
+				<a href="images/web/intensuge-1600.webp"><img src="images/web/intensuge-800.webp" alt="Intensuge med øvelser"></a>
 			</figure>
 			<figure>
-				<img src="images/dyt-baat.jpg" alt="Sketch fra forestilling" loading="lazy">
+				<a href="images/web/dyt-baat-1600.webp"><img src="images/web/dyt-baat-800.webp" alt="Sketch fra forestilling" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/social.jpg" alt="Social hygge i foreningen" loading="lazy">
+				<a href="images/web/social-1600.webp"><img src="images/web/social-800.webp" alt="Social hygge i foreningen" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/startsang.jpg" alt="Startsang på scenen" loading="lazy">
+				<a href="images/web/startsang-1600.webp"><img src="images/web/startsang-800.webp" alt="Startsang på scenen" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/sommerfesthygge.jpg" alt="Sommerfest" loading="lazy">
+				<a href="images/web/sommerfesthygge-1600.webp"><img src="images/web/sommerfesthygge-800.webp" alt="Sommerfest" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/telephonos.jpg" alt="Nummer fra revyen" loading="lazy">
+				<a href="images/web/telephonos-1600.webp"><img src="images/web/telephonos-800.webp" alt="Nummer fra revyen" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/bolo.jpg" alt="Scene fra forestilling" loading="lazy">
+				<a href="images/web/bolo-1600.webp"><img src="images/web/bolo-800.webp" alt="Scene fra forestilling" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/intens2.jpg" alt="Revyhold under øvelse" loading="lazy">
+				<a href="images/web/intens2-1600.webp"><img src="images/web/intens2-800.webp" alt="Revyhold under øvelse" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/elonkeld.jpg" alt="Skuespiller på scenen" loading="lazy">
+				<a href="images/web/elonkeld-1600.webp"><img src="images/web/elonkeld-800.webp" alt="Skuespiller på scenen" loading="lazy"></a>
 			</figure>
 			<figure>
-				<img src="images/klap.jpg" alt="Publikum klapper" loading="lazy">
+				<a href="images/web/klap-1600.webp"><img src="images/web/klap-800.webp" alt="Publikum klapper" loading="lazy"></a>
 			</figure>
 		</div>
 	</div>
-</section>
+</main>
+
+<dialog class="lightbox" id="lightbox" aria-label="Billedvisning">
+	<img alt="">
+	<p class="lightbox-caption"></p>
+	<button type="button" class="lightbox-btn lightbox-close" data-step="0" aria-label="Luk">✕</button>
+	<button type="button" class="lightbox-btn lightbox-prev" data-step="-1" aria-label="Forrige billede">‹</button>
+	<button type="button" class="lightbox-btn lightbox-next" data-step="1" aria-label="Næste billede">›</button>
+</dialog>
 
 <div id="footer"></div>
 
+<script src="layout.js"></script>
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		fetch("navbar.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("navbar").innerHTML = data;
+	// Lightbox: vis billederne i stor størrelse og bladr med pile, tastatur eller swipe
+	(() => {
+		const links = [...document.querySelectorAll('.gallery-grid a')], box = document.getElementById('lightbox');
+		const img = box.querySelector('img'), caption = box.querySelector('.lightbox-caption');
+		let current = 0, x0 = null, swiped = false;
 
-				const hamburger = document.getElementById("hamburger");
-				const mobileMenu = document.getElementById("mobileMenu");
+		const show = i => {
+			current = (i + links.length) % links.length;
+			img.src = links[current].href;
+			img.alt = caption.textContent = links[current].querySelector('img').alt;
+		};
 
-				if (hamburger) {
-					hamburger.addEventListener("click", () => {
-						mobileMenu.classList.toggle("active");
-					});
-				}
-
-				const links = document.querySelectorAll('.nav-links a');
-				links.forEach(link => {
-					if (link.textContent.trim().toLowerCase() === 'galleri') {
-						link.classList.add('active');
-					}
-				});
-			});
-
-		fetch("footer.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("footer").innerHTML = data;
-			});
-	});
+		links.forEach((a, i) => a.addEventListener('click', e => {
+			e.preventDefault();
+			show(i);
+			box.showModal();
+		}));
+		box.addEventListener('click', e => {
+			if (swiped) return swiped = false;
+			const step = e.target.dataset.step;
+			if (step === '0' || e.target === box) box.close();
+			else if (step) show(current + Number(step));
+		});
+		box.addEventListener('keydown', e => {
+			if (e.key === 'ArrowLeft') show(current - 1);
+			if (e.key === 'ArrowRight') show(current + 1);
+		});
+		box.addEventListener('pointerdown', e => {
+			x0 = e.clientX;
+			swiped = false;
+		});
+		box.addEventListener('pointerup', e => {
+			if (x0 !== null && Math.abs(e.clientX - x0) > 50) {
+				show(current + (e.clientX < x0 ? 1 : -1));
+				swiped = true;
+			}
+			x0 = null;
+		});
+	})();
 </script>
 
 </body>

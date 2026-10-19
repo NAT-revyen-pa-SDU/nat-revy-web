@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billetsalget er afsluttet - NAT Revyen</title>
     <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#14032f">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+    <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="navbar"></div>
 
-<section class="about contact-page">
+<main id="indhold" class="about contact-page">
     <div class="about-inner contact-layout">
         <div class="about-text-wrapper contact-simple">
-            <h2>Billetsalget er afsluttet</h2>
+            <h1>Billetsalget er afsluttet</h1>
             <p>Tak til alle, der kom forbi i Studenterhuset Odense. Følg med her, når næste års billetter åbner.</p>
 
             <!--
@@ -43,41 +46,11 @@
             -->
         </div>
     </div>
-</section>
+</main>
 
 <div id="footer"></div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch("navbar.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-
-                const hamburger = document.getElementById("hamburger");
-                const mobileMenu = document.getElementById("mobileMenu");
-
-                if (hamburger) {
-                    hamburger.addEventListener("click", () => {
-                        mobileMenu.classList.toggle("active");
-                    });
-                }
-
-                const links = document.querySelectorAll('.nav-links a');
-                links.forEach(link => {
-                    if (link.textContent.trim().toLowerCase() === 'køb billet') {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-        fetch("footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
-    });
-</script>
+<script src="layout.js"></script>
 
 </body>
 </html>

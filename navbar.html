@@ -1,25 +1,28 @@
+<a class="skip-link" href="#indhold">Spring til indhold</a>
 <header class="navbar">
     <div class="nav-inner">
 
         <a href="index.html" class="logo">
-            <img src="images/logoNAT.svg" alt="NAT REVY logo">
+            <span class="logo-mark" aria-hidden="true"></span>
             <span class="logo-text">NAT Revy</span>
         </a>
 
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Hovedmenu">
             <a href="om-os.html">Om os</a>
             <a href="galleri.html">Galleri</a>
+            <a href="kalender.html">Kalender</a>
             <a href="kontakt.html">Kontakt</a>
             <a href="tilmeld.html" class="btn-cta">Bliv Medlem</a>
         </nav>
 
-        <div class="hamburger" id="hamburger">☰</div>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </div>
 
-    <div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobilmenu">
         <a href="om-os.html">Om os</a>
         <a href="galleri.html">Galleri</a>
+        <a href="kalender.html">Kalender</a>
         <a href="kontakt.html">Kontakt</a>
         <a href="tilmeld.html" class="btn-cta">Bliv Medlem</a>
-    </div>
+    </nav>
 </header>

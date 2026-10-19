@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Om os - NAT Revyen</title>
+    <meta name="description" content="NAT Revyen blev stiftet i 2023 på det naturvidenskabelige fakultet på SDU og har i dag ca. 30 medlemmer og et livligt socialt fællesskab.">
+    <meta name="theme-color" content="#14032f">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap"
+    <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+    <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,12 +21,13 @@
 
 <div id="navbar"></div>
 
+<main id="indhold">
 <section class="hero-om-os">
     <div class="hero-overlay-om-os"></div>
     <div class="hero-content">
-        <h3>Om os</h3>
-        <h2>Naturvidenskabelig Fakultets Revy</h2>
-        <h3>NAT-Revyen er skabt af studerende for studerende - med fokus på satire, musik, scenekunst og fællesskab</h3>
+        <p class="kicker">Om os</p>
+        <h1>Naturvidenskabelig Fakultets Revy</h1>
+        <p class="hero-lead">NAT-Revyen er skabt af studerende for studerende - med fokus på skuespil, musik, scenekunst og fællesskab</p>
     </div>
 </section>
 
@@ -32,13 +39,14 @@
                     <h3>Historie</h3>
                     <p>
                         NAT-revyen blev stiftet i efteråret 2023 af Rebecka Birk Jensen. Rebecka ville gerne starte et
-                        socialt fællesskab med fokus på kreativ udfoldelse på det naturfaglige fakultet.
-                        Der blev derfor holdt stiftende generalforsamling den 29. november 2023.
+                        socialt fællesskab med fokus på kreativ udfoldelse på det Naturvidenskabelige fakultet på SDU.
+                        Der blev derfor holdt stiftende generalforsamling i de dage, den <br><time class="mark-date" datetime="2023-11-29">29. november 2023</time>.
                     </p>
                     <p>
                         Således startede den første revy-sæson i NAT-revyen, som kulminerede med forestillingen
-                        <strong class="highlight">Kald det NAT-REVY</strong>
+                        <strong class="mark-show">Kald det NAT-REVY</strong>
                     </p>
+                    <p><a href="forestillinger.html">Se de tidligere forestillinger</a></p>
                 </article>
 
                 <article class="about-card">
@@ -49,8 +57,8 @@
                         hver måned - lidt mindre i ferie- og eksamensperioder.
                     </p>
                     <p>
-                        Vi er en frivillig forening af studerende, og vi er afhængige af donationer, sponsorater og
-                        frivilligt arbejde for at kunne leje lokaler, lave kostumer og hyre en lydmand til vores
+                        Vi er en frivillig forening af studerende, og vi er afhængige af donationer, sponsorater samt
+                        frivilligt arbejde for at kunne leje spillested, lave kostumer og hyre en lydmand til vores
                         forestillinger.
                     </p>
                 </article>
@@ -58,52 +66,70 @@
         </div>
 
         <div class="about-images about-page-media">
-            <img src="images/social.jpg" alt="Revy forestilling">
-            <article class="about-card">
-                <h3>Hjemmesiden</h3>
-                <p>
-                    Hjemmesiden hostes gennem Github Pages. Kildekoden er åben og kan findes
-                    <a href="https://github.com/NAT-revyen-pa-SDU/nat-revy-web" target="_blank" rel="noopener noreferrer">her</a>.
-                </p>
-            </article>
+            <img src="images/web/social-1200.webp" alt="Social hygge i foreningen" width="1200" height="640" loading="lazy">
+            <img src="images/web/sommerfesthygge-1200.webp" alt="Sommerfest i foreningen" width="1200" height="796" loading="lazy">
         </div>
+
+        <section class="board" id="bestyrelse" aria-labelledby="board-title">
+            <div class="board-head">
+                <h2 id="board-title">Bestyrelsen</h2>
+                <p>Bestyrelsen står for den årlige revy og vælges for et år ad gangen på generalforsamlingen i november. Den nye bestyrelse bliver præsenteret her efter generalforsamlingen.</p>
+            </div>
+
+            <!--
+            SÅDAN FYLDER DU BESTYRELSEN UD
+            - Navn: erstat "Vælges i november" med personens navn.
+            - Foto: læg et kvadratisk billede i images/bestyrelse/ og erstat
+              <div class="board-photo" aria-hidden="true">Foto følger</div> med
+              <img class="board-photo" src="images/bestyrelse/navn.webp" alt="" loading="lazy">
+            - Menige medlemmer (op til seks): kopiér en <li> pr. person og skriv "Menigt medlem" som post.
+            -->
+            <ul class="board-list">
+                <li class="board-member">
+                    <div class="board-photo" aria-hidden="true">Foto følger</div>
+                    <p class="board-role">Formand</p>
+                    <p class="board-name">Vælges i november</p>
+                </li>
+                <li class="board-member">
+                    <div class="board-photo" aria-hidden="true">Foto følger</div>
+                    <p class="board-role">Næstformand</p>
+                    <p class="board-name">Vælges i november</p>
+                </li>
+                <li class="board-member">
+                    <div class="board-photo" aria-hidden="true">Foto følger</div>
+                    <p class="board-role">Kasserer</p>
+                    <p class="board-name">Vælges i november</p>
+                </li>
+                <li class="board-member">
+                    <div class="board-photo" aria-hidden="true">Foto følger</div>
+                    <p class="board-role">Menige medlemmer</p>
+                    <p class="board-name">Op til seks vælges i november</p>
+                </li>
+            </ul>
+        </section>
+
+        <aside class="site-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M12 12v6m-3-3 3 3 3-3"/></svg>
+            <p>Foreningens vedtægter</p>
+            <a class="site-note-link" href="dokumenter/Vedt%C3%A6gter%20NAT%20REVY.pdf" download="NAT-Revyen-vedtaegter.pdf">Hent som PDF</a>
+        </aside>
+
+        <aside class="site-note">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <p>
+                Hjemmesiden hostes gennem Github Pages. Kildekoden er åben og kan findes
+                <a href="https://github.com/NAT-revyen-pa-SDU/nat-revy-web" target="_blank" rel="noopener noreferrer">her</a>.
+            </p>
+        </aside>
     </div>
 </section>
-
+</main>
 
 <div id="footer"></div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch("navbar.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-
-                const hamburger = document.getElementById("hamburger");
-                const mobileMenu = document.getElementById("mobileMenu");
-
-                if (hamburger) {
-                    hamburger.addEventListener("click", () => {
-                        mobileMenu.classList.toggle("active");
-                    });
-                }
-
-                const links = document.querySelectorAll('.nav-links a');
-                links.forEach(link => {
-                    if (link.textContent.trim().toLowerCase() === 'om os') {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-        fetch("footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
-    });
-</script>
+<script src="layout.js"></script>
 
 </body>
 </html>

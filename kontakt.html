@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt os</title>
+    <title>Kontakt - NAT Revyen</title>
+    <meta name="description" content="Kontakt NAT Revyen på SDU via e-mail, Facebook eller Instagram, eller gå direkte til tilmelding.">
+    <meta name="theme-color" content="#14032f">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap"
+    <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+    <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,67 +19,51 @@
 
 <div id="navbar"></div>
 
-<section class="about contact-page">
-    <div class="about-inner contact-layout">
-        <div class="about-text-wrapper contact-simple">
-            <h2>Kontakt os</h2>
-            <p>Har du spørgsmål til NAT Revyen, eller vil du gerne være med? Skriv til os eller hop direkte videre til tilmelding</p>
+<main id="indhold" class="contact-page">
+    <div class="contact-hero">
+        <div class="contact-copy">
+            <p class="kicker">Kontakt</p>
+            <h1>Kontakt os</h1>
+            <p class="contact-intro">Har du spørgsmål til NAT Revyen, eller vil du gerne være med? Skriv til os eller hop direkte videre til tilmelding</p>
 
-            <div class="contact-panel">
-                <div class="contact-item">
-                    <h3>Tilmelding</h3>
-                    <a class="contact-link" href="https://sdusnatrevy.nemtilmeld.dk/" target="_blank"
-                       rel="noopener noreferrer">Gå til NemTilmeld</a>
-                </div>
-
-                <div class="contact-item">
-                    <h3>Spørgsmål</h3>
-                    <a class="contact-link" href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a>
-                </div>
-
-                <div class="contact-item">
-                    <h3>Facebook</h3>
-                    <a class="contact-link" href="https://www.facebook.com/profile.php?id=61552933400622"
-                       target="_blank" rel="noopener noreferrer">Besøg vores Facebook</a>
-                </div>
-            </div>
+            <ul class="contact-list">
+                <li>
+                    <a class="contact-row" href="https://m.me/61552933400622" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-text"><small>Messenger</small><strong>Skriv til os på Facebook</strong></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="contact-row" href="https://sdusnatrevy.nemtilmeld.dk/" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-text"><small>Tilmelding</small><strong>Gå til NemTilmeld</strong></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="contact-row" href="mailto:natrevy@org.sdu.dk">
+                        <span class="contact-text"><small>Spørgsmål</small><strong>natrevy@org.sdu.dk</strong></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="contact-row" href="https://www.facebook.com/profile.php?id=61552933400622" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-text"><small>Facebook</small><strong>Besøg vores Facebook</strong></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="contact-row" href="https://www.instagram.com/sdusnatrevy/" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-text"><small>Instagram</small><strong>@sdusnatrevy</strong></span>
+                    </a>
+                </li>
+            </ul>
         </div>
+
+        <figure class="contact-photo">
+            <img src="images/web/group-1200.webp" alt="Hele holdet samlet" width="1200" height="796">
+        </figure>
     </div>
-</section>
+</main>
 
 <div id="footer"></div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch("navbar.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-
-                const hamburger = document.getElementById("hamburger");
-                const mobileMenu = document.getElementById("mobileMenu");
-
-                if (hamburger) {
-                    hamburger.addEventListener("click", () => {
-                        mobileMenu.classList.toggle("active");
-                    });
-                }
-
-                const links = document.querySelectorAll('.nav-links a');
-                links.forEach(link => {
-                    if (link.textContent.trim().toLowerCase() === 'kontakt') {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-        fetch("footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
-    });
-</script>
+<script src="layout.js"></script>
 
 </body>
 </html>
