@@ -3,52 +3,72 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>NAT Revy</title>
+    <meta name="description" content="NAT Revyen er en studenterdrevet revy på SDU, hvor omkring 30 studerende hvert år skaber en forestilling med sketches, sange og scenografi.">
+    <meta name="theme-color" content="#14032f">
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://natrevyen.sdu.dk/" />
-    <meta property="og:title" content="NAT-Revyen på SDU" />
-    <meta property="og:description" content="NAT-Revyen er en forening
-					     på SDU skabt af studerende
-					     for studerende - med fokus på
-					     satire, musik, scenekunst og 
-					     fællesskab" />
-    <title>NAT REVY</title>
+    <meta property="og:title" content="NAT Revyen på SDU" />
+    <meta property="og:description" content="NAT Revyen er en forening på SDU skabt af studerende for studerende - med fokus på skuespil, musik, scenekunst og fællesskab" />
+    <meta property="og:image" content="https://natrevyen.sdu.dk/images/web/og-image.jpg" />
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="images/logo/favicon.svg">
+    <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/web/slutsang-1600.webp" fetchpriority="high">
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <div id="navbar"></div>
 
+<main id="indhold">
 <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="hero-title"><span class="hero-title-nat">NAT<small>(Naturvidenskabelig)</small></span>-Revy</h1>
-        <h2>Studenterdrevet revy på SDU</h2>
-        <a href="tilmeld.html" class="btn-cta hero-ticket-cta">Bliv en del af NAT-Revyen</a>
+        <!-- Bogstaverne træder ind ét ad gangen som et kor; aria-label gør, at skærmlæsere læser titlen som ét ord -->
+        <h1 class="hero-title" aria-label="NAT Revy"><span class="hero-title-nat" aria-hidden="true"><span style="--i:0">N</span><span style="--i:1">A</span><span style="--i:2">T</span><small>(Naturvidenskabelig)</small></span><span aria-hidden="true"><span style="--i:4">R</span><span style="--i:5">e</span><span style="--i:6">v</span><span style="--i:7">y</span></span></h1>
+        <p class="hero-sub">Studenterdrevet revy på SDU</p>
+        <div class="hero-actions">
+            <a href="tilmeld.html" class="btn-cta">Bliv medlem</a>
+            <a href="#om" class="btn-cta btn-outline">Hvad er NAT Revyen?</a>
+        </div>
     </div>
+
+    <!-- Næste arrangement: en lille boks med datoen, der folder sig ud ved hover (udfyldes af events.js) -->
+    <a class="next-event" href="kalender.html" data-next-event hidden>
+        <span class="next-event-date"><small>Næste</small><b class="next-event-day"></b></span>
+        <span class="next-event-text"></span>
+    </a>
 </section>
 
-<section class="about">
-    <div class="about-inner">
+<section class="about stage" id="om">
+    <div class="about-inner about-intro">
 
         <div class="about-text-wrapper">
-            <h2>NAT Revyen samler studerende om satire, musik og fællesskab</h2>
+            <h2>NAT Revyen samler studerende om skuespil, musik og fællesskab</h2>
             <p>
                 NAT Revyen er en studenterdrevet forening på SDU, hvor omkring 30 engagerede
                 studerende hvert år skaber en revy fyldt med sketches, sange og scenografi.
                 Vi arbejder sammen på tværs af studieretninger og opfører forestillingen
                 i Studenterhuset Odense den første weekend i oktober
             </p>
-            <img src="images/logoNAT.svg" alt="NAT REVY logo" class="about-logo">
+            <p class="about-more"><a class="btn-cta btn-outline" href="om-os.html">Læs mere om foreningen</a></p>
         </div>
 
         <div class="about-images">
-            <img src="images/dyt-baat.jpg" alt="Revy forestilling">
-            <img src="images/group.jpg" alt="Revy fællesskab">
+            <img src="images/web/group-1200.webp" alt="Revy fællesskab" width="1200" height="796" loading="lazy">
+            <img src="images/web/dyt-baat-1200.webp" alt="Revy forestilling" width="1200" height="800" loading="lazy">
+            <span class="logo-badge">
+                <img src="images/logo/logo_ensfarvet_mørklilla.svg" alt="" width="536" height="613" loading="lazy">
+            </span>
         </div>
     </div>
 </section>
-<section class="roles">
+
+<section class="roles band" id="roller">
     <div class="roles-inner">
         <div class="roles-header">
             <h2>Hvilken rolle passer til dig?</h2>
@@ -57,78 +77,135 @@
 
         <div class="roles-grid">
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/skuespiller.jpg" alt="Skuespillere i en sketch" loading="lazy">
+                <img class="role-card-img" src="images/web/role-skuespiller-800.webp" alt="Skuespillere i en sketch" loading="lazy">
                 <div class="role-card-body">
                     <h3>Skuespiller</h3>
                     <p>Stå på scenen, spil karakterer og formidl sketches med energi</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Sketches</li><li>Sange</li><li>Karakterer</li></ul>
                 </div>
             </article>
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/band.jpg" alt="Bandet spiller live" loading="lazy">
+                <img class="role-card-img" src="images/web/role-band-2026-800.webp" alt="Bandet 2026 med trompet, saxofon, guitarer og trommestikker" loading="lazy">
                 <div class="role-card-body">
                     <h3>Band</h3>
                     <p>Spil live musik til forestillingen og vær med til at skabe stemningen</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Live musik</li><li>Jamaftener</li><li>Sange</li></ul>
                 </div>
             </article>
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/instruktoer.jpg" alt="Prøve på scenen" loading="lazy">
+                <img class="role-card-img" src="images/web/role-instruktoer-800.webp" alt="Prøve på scenen" loading="lazy">
                 <div class="role-card-body">
                     <h3>Instruktør</h3>
                     <p>Hjælp med iscenesættelse, timing og at samle numrene til en helhed</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Iscenesættelse</li><li>Timing</li><li>Valg af sketches</li></ul>
                 </div>
             </article>
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/sketch.jpg" alt="Holdet samlet om manuskripterne" loading="lazy">
+                <img class="role-card-img" src="images/web/role-sketch-800.webp" alt="Holdet samlet om manuskripterne" loading="lazy">
                 <div class="role-card-body">
                     <h3>Sketch-skriver</h3>
-                    <p>Skriv satire, punchlines og idéer, som bliver til revynumre</p>
+                    <p>Skriv skuespil, punchlines og idéer, som bliver til revynumre</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Skriveaftener</li><li>Satire</li><li>Punchlines</li></ul>
                 </div>
             </article>
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/backstage.jpg" alt="Medlemmer maler og bygger rekvisitter" loading="lazy">
+                <img class="role-card-img" src="images/web/role-backstage-800.webp" alt="Medlemmer maler og bygger rekvisitter" loading="lazy">
                 <div class="role-card-body">
                     <h3>Backstage</h3>
                     <p>Hold styr på rekvisitter, skift og afvikling bag scenen</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Rekvisitter</li><li>Sceneskift</li><li>Afvikling</li></ul>
                 </div>
             </article>
             <article class="role-card">
-                <img class="role-card-img" src="images/roles/kostume.jpg" alt="Skuespillere i kostumer" loading="lazy">
+                <img class="role-card-img" src="images/web/role-kostume-800.webp" alt="Skuespillere i kostumer" loading="lazy">
                 <div class="role-card-body">
                     <h3>Scenografi og kostume</h3>
                     <p>Design visuelle udtryk, kulisser og kostumer, der løfter forestillingen</p>
+                    <ul class="tags role-tags" aria-label="Det laver man"><li>Kulisser</li><li>Kostumer</li><li>Design</li></ul>
                 </div>
             </article>
-            <article class="role-card role-card-cta role-card-cta-prominent">
+            <article class="role-card role-card-cta">
                 <div class="role-card-body">
-                    <h3>Vær med næste år</h3>
-                    <p>Har du lyst til at stå på scenen eller arbejde bag kulisserne? Tilmeld dig, så er du med, når næste revy tager form.</p>
-                    <a href="tilmeld.html" class="btn-cta">Bliv medlem</a>
+                    <h3>Du behøver ikke vælge rolle nu</h3>
+                    <p>Roller søges først i maj, så der er god tid til at finde ud af, om du hører til på scenen, i bandet eller bag kulisserne.</p>
+                    <a href="#saesonen" class="btn-cta btn-outline">Se sæsonen</a>
                 </div>
             </article>
+        </div>
+        <a class="roles-quote" href="tilmeld.html#godt-at-vide">
+            <q>Hvad kræver det at være med?</q>
+            <span>– spørger alle nye. <b>Læs svarene</b></span>
+        </a>
+    </div>
+</section>
+
+<section class="recruit">
+    <div class="recruit-inner">
+        <h2>Vi mangler revyster!</h2>
+        <p>Til næste revy søger vi skuespillere, musikere, skribenter og hænder bag scenen. Du behøver ingen erfaring, og studerende fra alle fakulteter på SDU er velkomne!</p>
+        <a href="tilmeld.html" class="btn-cta btn-dark">Bliv medlem</a>
+        <!-- Den tomme plads fra billedet på Tilmeld: en silhuet, der venter på at blive udfyldt -->
+        <div class="recruit-spot">
+            <svg viewBox="0 0 590 1530" aria-hidden="true"><polygon points="264,18 299,6 369,4 404,21 412,56 444,86 469,116 472,136 444,144 464,171 486,208 499,246 494,281 474,308 459,331 484,356 502,396 506,446 504,501 496,546 476,586 456,611 452,646 449,676 469,746 499,816 519,906 536,996 554,1096 570,1196 582,1286 586,1344 524,1354 394,1360 384,1506 329,1506 324,1360 239,1360 232,1506 178,1506 169,1360 84,1354 4,1344 16,1256 36,1156 62,1056 92,956 116,866 136,786 150,721 154,688 114,661 76,638 60,596 60,546 72,491 99,426 124,376 142,346 142,291 152,236 167,186 186,144 190,126 196,96 214,71 249,51 259,31"/><ellipse cx="205" cy="1507" rx="46" ry="18"/><ellipse cx="356" cy="1507" rx="46" ry="18"/></svg>
+            <span>Dig?</span>
         </div>
     </div>
 </section>
 
+<!-- Sæsonen sat op som et revyprogram. Navne og perioder hentes fra de samme faser som årshjulet (Season i events.js),
+     så de altid passer sammen. Her står kun beskrivelserne. Den fase, vi er i nu, markeres ud fra datoen (se forside.js). -->
+<section class="program stage" id="saesonen" aria-labelledby="program-titel">
+    <div class="program-inner">
+        <div class="program-head">
+            <h2 id="program-titel">Sæsonen</h2>
+            <p>Fra intromødet i november til premieren i oktober.</p>
+        </div>
+        <ol class="program-list">
+            <li data-phase="0">
+                <span class="program-nr" aria-hidden="true">1</span>
+                <div class="program-body">
+                    <p class="program-line"><strong>Opstart</strong><span class="program-dots" aria-hidden="true"></span><span class="program-when">November til januar</span></p>
+                    <p class="program-desc">Intromødet og generalforsamlingen skyder sæsonen i gang.</p>
+                </div>
+            </li>
+            <li data-phase="1">
+                <span class="program-nr" aria-hidden="true">2</span>
+                <div class="program-body">
+                    <p class="program-line"><strong>Skrivning</strong><span class="program-dots" aria-hidden="true"></span><span class="program-when">Februar til april</span></p>
+                    <p class="program-desc">Sketches og sange bliver skrevet til skriveaftener og hyggemøder.</p>
+                </div>
+            </li>
+            <li data-phase="2">
+                <span class="program-nr" aria-hidden="true">3</span>
+                <div class="program-body">
+                    <p class="program-line"><strong>Valgaften og roller</strong><span class="program-dots" aria-hidden="true"></span><span class="program-when">April og maj</span></p>
+                    <p class="program-desc">Sketches bliver valgt til valgaftenen, og rollerne bliver fordelt.</p>
+                </div>
+            </li>
+            <li data-phase="3">
+                <span class="program-nr" aria-hidden="true">4</span>
+                <div class="program-body">
+                    <p class="program-line"><strong>Øvelse</strong><span class="program-dots" aria-hidden="true"></span><span class="program-when">Maj til september</span></p>
+                    <p class="program-desc">Numrene bliver øvet ind frem mod premieren.</p>
+                </div>
+            </li>
+            <li data-phase="4">
+                <span class="program-nr" aria-hidden="true">5</span>
+                <div class="program-body">
+                    <p class="program-line"><strong>Intensuge og forestilling</strong><span class="program-dots" aria-hidden="true"></span><span class="program-when">September og oktober</span></p>
+                    <p class="program-desc">En uge med prøver hver dag og så forestillingerne i Studenterhuset Odense den første weekend i oktober.</p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+</main>
+
 <div id="footer"></div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", async () => {
-        const navbarResponse = await fetch("navbar.html");
-        document.getElementById("navbar").innerHTML = await navbarResponse.text();
-
-        const hamburger = document.getElementById("hamburger");
-        const mobileMenu = document.getElementById("mobileMenu");
-
-        if (hamburger && mobileMenu) {
-            hamburger.addEventListener("click", () => {
-                mobileMenu.classList.toggle("active");
-            });
-        }
-
-        const footerResponse = await fetch("footer.html");
-        document.getElementById("footer").innerHTML = await footerResponse.text();
-    });
-</script>
+<script src="layout.js"></script>
+<script src="events.js"></script>
+<script src="forside.js"></script>
 
 </body>
 </html>
