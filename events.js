@@ -1,9 +1,8 @@
-// Fælles for kalenderen, forsiden og Tilmeld: sæsonens faser og arrangementerne fra det offentliggjorte Google Sheets-ark
+// Fælles for forsiden, Tilmeld og kalenderen: sæsonens faser og arrangementerne fra Google Sheets-arket
 
-// Sæsonens faser: [navn, startmåned (0 = januar), startdag, kort navn til hjulet, hvis der ikke er plads].
-// Hver fase varer, til den næste begynder. De bruges både i årshjulet (kalender.js) og i programmet "Sæsonen" på forsiden (forside.js),
-// så de altid passer sammen. Beskrivelserne til forsiden står i index.html.
-// Manuelt konfigurerede faser, som ikke kan hentes fra Google Sheets, fordi de ikke er aktiviteter i sig selv. De vises som ringe yderst i hjulet, med navnene på den nederste halvdel af hjulet.
+// Sæsonens faser står her og ikke i arket, fordi de ikke er arrangementer. Hver fase varer, til den næste begynder.
+// [navn, startmåned (0 = januar), startdag, kort navn til hjulet, hvis der ikke er plads]
+// De bruges i årshjulet (kalender.js) og i "Sæsonen" på forsiden (forside.js), hvis beskrivelser står i index.html.
 window.Season = (() => {
     const START = 10;   // sæsonen starter i november (0 = januar)
     const PHASES = [
@@ -13,11 +12,16 @@ window.Season = (() => {
         ['Øvelse', 4, 8],
         ['Intensuge og forestilling', 8, 24, 'Intensuge'],
     ];
+    const MONTHS = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'];
     const seasonOf = t => { const d = new Date(t); return d.getUTCMonth() >= START ? d.getUTCFullYear() : d.getUTCFullYear() - 1; };
     const phaseStart = (i, y) => { const [, m, d] = PHASES[i]; return Date.UTC(m >= START ? y : y + 1, m, d); };
     const phaseEnd = (i, y) => i + 1 < PHASES.length ? phaseStart(i + 1, y) : Date.UTC(y + 1, START, 1);
     const phaseOf = t => { const y = seasonOf(t); return PHASES.findLastIndex((p, i) => phaseStart(i, y) <= t); };
-    return {START, PHASES, seasonOf, phaseStart, phaseEnd, phaseOf};
+    const phaseSpan = (i, y) => {   // fx "februar til april" eller "april og maj"
+        const a = new Date(phaseStart(i, y)).getUTCMonth(), b = new Date(phaseEnd(i, y) - 864e5).getUTCMonth();
+        return a === b ? MONTHS[a] : (b - a + 12) % 12 === 1 ? `${MONTHS[a]} og ${MONTHS[b]}` : `${MONTHS[a]} til ${MONTHS[b]}`;
+    };
+    return {START, PHASES, MONTHS, seasonOf, phaseStart, phaseEnd, phaseOf, phaseSpan};
 })();
 
 (() => {
@@ -69,8 +73,7 @@ window.Season = (() => {
     // data-rings begrænser til bestemte ringe fra arket (adskilt med komma). Feltet er skjult, indtil der er noget at vise.
     const fields = document.querySelectorAll('[data-next-event]'), monthBox = document.querySelector('[data-month-list]');
     if (!fields.length && !monthBox) return;
-    const DAY = 864e5;
-    const MONTHS = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'];
+    const DAY = 864e5, {MONTHS} = window.Season;
     const DAYS = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
     const now = new Date(), TODAY = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
 

@@ -1,8 +1,7 @@
 // Kalenderen: årshjul, måned og liste over sæsonens arrangementer (data hentes via events.js)
 (() => {
     const DAY = 864e5, TAU = Math.PI * 2;
-    const {START: SEASON_START, PHASES, seasonOf, phaseStart, phaseEnd, phaseOf} = window.Season;   // sæsonen og faserne (se events.js)
-    const MONTHS = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'];
+    const {START: SEASON_START, PHASES, MONTHS, seasonOf, phaseStart, phaseEnd, phaseOf, phaseSpan} = window.Season;   // sæsonen og faserne (se events.js)
     const BREAKS = [['Juleferie', 11, 20, 0, 4], ['Sommerferie', 6, 1, 7, 31]];   // universitetets ferier: [navn, fra måned, dag, til måned, dag]
     const R = {out: 384, phIn: 350, moIn: 318, catOut: 308, catIn: 112, center: 100, gap: 5};   // radier i hjulet
     const NAV_HEIGHT = 79;   // navbarens højde; kontrollinjen hænger lige under den
@@ -65,12 +64,6 @@
     function countdown(show) {
         const n = Math.round((show.start - TODAY) / DAY);
         return n > 1 ? `Premiere om ${n} dage` : n === 1 ? 'Premiere i morgen!' : TODAY <= show.end ? 'Forestilling i dag!' : `Forestilling ${fmtWhen(show)}`;
-    }
-
-    /* Faserne */
-    function phaseSpan(i, y) {   // fx "februar til april"
-        const a = new Date(phaseStart(i, y)).getUTCMonth(), b = new Date(phaseEnd(i, y) - DAY).getUTCMonth();
-        return a === b ? MONTHS[a] : `${MONTHS[a]} til ${MONTHS[b]}`;
     }
 
     /* Hjulet */
