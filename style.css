@@ -306,6 +306,8 @@ main { overflow-x: clip; }   /* båndene går ud til kanten uden at give vandret
     color: #fff;
 }
 
+.faculty-tags .is-leaving { mask-image: linear-gradient(to right, #000 15%, rgba(0, 0, 0, 0.1)); }   /* dimittenderne er på vej ud */
+
 /* ---------- Navbar og mobilmenu ---------- */
 
 .navbar {
@@ -1623,6 +1625,14 @@ img.board-photo { border: 0; }
     background: var(--night);
 }
 
+/* Tilmeld: "Mød os" fylder fra start (to linjer tekst), så billedet ved siden af ikke hopper, når arket er hentet */
+.contact-list li[data-next-event][hidden] {
+    display: block !important;
+    visibility: hidden;
+}
+
+.contact-list [data-next-event] .next-event-text { min-height: 2lh; }
+
 .contact-text {
     display: grid;
     gap: 0.1rem;
@@ -1702,6 +1712,7 @@ img.board-photo { border: 0; }
 @media (max-width: 680px) {
     .contact-page { padding: 132px 1rem var(--section-y); }
     .contact-cta { width: 100%; }
+    .contact-list [data-next-event] .next-event-text { min-height: 3lh; }
 }
 
 @media (min-width: 1001px) {
