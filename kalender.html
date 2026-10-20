@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,28 +22,50 @@
     <div class="gallery-inner hjul loading">
         <div class="gallery-header">
             <h1>Kalender</h1>
-            <p>Årets gang i NAT-Revy</p>
-            <p>Tryk på et element for at se detaljer</p>
+            <p>Årets gang i NAT Revyen</p>
+            <!-- Pladsholder: her kommer et link til at abonnere på kalenderen i Apple og Google Kalender -->
+            <p class="subscribe">
+                <!-- <button type="button" class="btn-cta btn-outline" disabled>Abonnér på kalenderen</button>
+                <span class="subscribe-soon">Kommer snart</span>-->
+            </p>
         </div>
 
-        <p class="hjul-status" id="status" role="status">Henter datoer…</p>
+        <p class="hjul-status" id="status" role="status">Stiller scenen op…</p>
+
         <div class="hjul-show" id="show" hidden></div>
 
         <div class="hjul-bar">
             <div class="hjul-tabs">
                 <button type="button" data-view="wheel">Årshjul</button>
+                <button type="button" data-view="month">Måned</button>
                 <button type="button" data-view="list">Liste</button>
             </div>
             <div class="hjul-nav">
-                <button type="button" id="prev" aria-label="Forrige sæson">‹</button>
+                <button type="button" id="prev" aria-label="Forrige">‹</button>
                 <span id="label"></span>
-                <button type="button" id="next" aria-label="Næste sæson">›</button>
+                <button type="button" id="next" aria-label="Næste">›</button>
             </div>
+            <nav class="hjul-jump" aria-labelledby="jump-label">
+                <span class="jump-label" id="jump-label">Hop til</span>
+                <span class="jump-list" id="jump"></span>
+            </nav>
         </div>
-        <div class="hjul-filters" id="filters"></div>
+        <div class="hjul-filters">
+            <button type="button" class="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filters">Filtrer</button>
+            <p class="filter-label" id="filters-label">Vis i kalenderen</p>
+            <div class="filter-list" id="filters" role="group" aria-labelledby="filters-label"></div>
+        </div>
 
         <div class="hjul-layout">
-            <div class="hjul-card" id="view"></div>
+            <div class="hjul-main">
+                <div class="hjul-card" id="view"></div>
+                <!-- Hvad sker der den næste måned? Under årshjulet; Liste og Måned viser det allerede. Udfyldes fra kalender-arket af events.js -->
+                <section class="month side-month" data-month-list hidden aria-labelledby="month-title">
+                    <p class="kicker month-kicker"></p>
+                    <h2 class="month-title" id="month-title"></h2>
+                    <ul class="month-list"></ul>
+                </section>
+            </div>
             <div class="hjul-card hjul-side">
                 <div id="list"></div>
             </div>

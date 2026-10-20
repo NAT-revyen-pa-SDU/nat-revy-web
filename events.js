@@ -1,4 +1,25 @@
-// Fælles for kalenderen og forsiden: henter arrangementerne fra det offentliggjorte Google Sheets-ark
+// Fælles for kalenderen, forsiden og Tilmeld: sæsonens faser og arrangementerne fra det offentliggjorte Google Sheets-ark
+
+// Sæsonens faser: [navn, startmåned (0 = januar), startdag, kort navn til hjulet, hvis der ikke er plads].
+// Hver fase varer, til den næste begynder. De bruges både i årshjulet (kalender.js) og i programmet "Sæsonen" på forsiden (forside.js),
+// så de altid passer sammen. Beskrivelserne til forsiden står i index.html.
+// Manuelt konfigurerede faser, som ikke kan hentes fra Google Sheets, fordi de ikke er aktiviteter i sig selv. De vises som ringe yderst i hjulet, med navnene på den nederste halvdel af hjulet.
+window.Season = (() => {
+    const START = 10;   // sæsonen starter i november (0 = januar)
+    const PHASES = [
+        ['Opstart', 10, 1],
+        ['Skrivning', 1, 1],
+        ['Valgaften og roller', 3, 22, 'Valgaften'],
+        ['Øvelse', 4, 8],
+        ['Intensuge og forestilling', 8, 24, 'Intensuge'],
+    ];
+    const seasonOf = t => { const d = new Date(t); return d.getUTCMonth() >= START ? d.getUTCFullYear() : d.getUTCFullYear() - 1; };
+    const phaseStart = (i, y) => { const [, m, d] = PHASES[i]; return Date.UTC(m >= START ? y : y + 1, m, d); };
+    const phaseEnd = (i, y) => i + 1 < PHASES.length ? phaseStart(i + 1, y) : Date.UTC(y + 1, START, 1);
+    const phaseOf = t => { const y = seasonOf(t); return PHASES.findLastIndex((p, i) => phaseStart(i, y) <= t); };
+    return {START, PHASES, seasonOf, phaseStart, phaseEnd, phaseOf};
+})();
+
 (() => {
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5SpdilTv7s2GWvvAiClUPuui3sTkt4UuG9THOIh6U6T8EyE6bovqo4iAzr5fhmpIgVnrp-6MZ36y-/pub?output=csv';
 
@@ -26,7 +47,9 @@
 
     // Giver arrangementerne i arkets rækkefølge som {id, start, end, title, ring, time, place, note, kind, tbc}.
     // start og end er tidsstempler i UTC ved midnat.
-    window.loadEvents = async () => {
+    let cached;   // arket hentes kun én gang pr. side, selvom flere dele af siden beder om det
+    window.loadEvents = () => cached ||= fetchEvents();
+    async function fetchEvents() {
         const res = await fetch(SHEET_URL, {cache: 'no-store'});
         if (!res.ok) throw new Error(res.status);
         const [head, ...rows] = parseCSV(await res.text());
@@ -40,5 +63,72 @@
                 kind: get('type').toLowerCase(), tbc: get('foreløbig').toLowerCase() === 'ja'
             };
         }).filter(Boolean);
-    };
+    }
+
+    // Felter med data-next-event viser det næste arrangement, fx "Intromøde, torsdag 12. november kl. 16.15 på SDU".
+    // data-rings begrænser til bestemte ringe fra arket (adskilt med komma). Feltet er skjult, indtil der er noget at vise.
+    const fields = document.querySelectorAll('[data-next-event]'), monthBox = document.querySelector('[data-month-list]');
+    if (!fields.length && !monthBox) return;
+    const DAY = 864e5;
+    const MONTHS = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'];
+    const DAYS = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
+    const now = new Date(), TODAY = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+
+    function describe(a) {
+        const s = new Date(a.start), e = new Date(a.end);
+        let text = a.title + ', ';
+        if (a.end > a.start) {
+            text += s.getUTCMonth() === e.getUTCMonth()
+                ? `${s.getUTCDate()}.–${e.getUTCDate()}. ${MONTHS[e.getUTCMonth()]}`
+                : `${s.getUTCDate()}. ${MONTHS[s.getUTCMonth()]} – ${e.getUTCDate()}. ${MONTHS[e.getUTCMonth()]}`;
+        } else {
+            text += a.start === TODAY ? 'i dag' : a.start === TODAY + DAY ? 'i morgen' : `${DAYS[s.getUTCDay()]} ${s.getUTCDate()}. ${MONTHS[s.getUTCMonth()]}`;
+        }
+        if (a.time) text += ' kl. ' + a.time;
+        if (a.place && !a.place.includes('?')) text += ' på ' + a.place;
+        return text;
+    }
+
+    window.loadEvents().then(events => {
+        const coming = events.filter(a => a.end >= TODAY && !a.tbc).sort((a, b) => a.start - b.start);
+        fields.forEach(field => {
+            const rings = field.dataset.rings ? field.dataset.rings.split(',').map(r => r.trim().toLowerCase()) : null;
+            const next = coming.find(a => !rings || rings.includes(a.ring.toLowerCase()));
+            if (!next) return;
+            field.querySelector('.next-event-text').textContent = describe(next);
+            const day = field.querySelector('.next-event-day');   // kun i den lille boks på forsiden
+            if (day) {
+                const d = new Date(next.start);
+                day.textContent = `${d.getUTCDate()}. ${MONTHS[d.getUTCMonth()].slice(0, 3)}`;
+                field.setAttribute('aria-label', 'Næste arrangement: ' + describe(next));
+            }
+            field.hidden = false;
+        });
+        if (monthBox) monthList(monthBox, events.filter(a => a.end >= TODAY).sort((a, b) => a.start - b.start));
+    }, () => {});   // uden data vises felterne bare ikke
+
+    // "Sker i november": resten af denne måned, eller næste måned, når der er under en uge tilbage, eller der ikke sker mere i denne måned
+    function monthList(box, coming) {
+        const y = now.getFullYear(), m = now.getMonth();
+        coming = coming.filter(a => !(a.tbc && new Date(a.start).getUTCDate() === 1 && new Date(a.end + DAY).getUTCDate() === 1));   // ikke "i oktober" uden fast dato
+        const within = (a, month) => a.start < Date.UTC(y, month + 1, 1) && a.end >= Date.UTC(y, month, 1);
+        const month = (Date.UTC(y, m + 1, 1) - TODAY) / DAY <= 7 || !coming.some(a => within(a, m)) ? m + 1 : m;
+        const items = coming.filter(a => within(a, month)).slice(0, 6);
+        if (!items.length) return;
+        box.querySelector('.month-kicker').textContent = month === m ? 'Denne måned' : 'Næste måned';
+        box.querySelector('.month-title').textContent = 'Sker i ' + MONTHS[new Date(Date.UTC(y, month, 1)).getUTCMonth()];
+        box.querySelector('.month-list').replaceChildren(...items.map(a => {
+            const s = new Date(a.start), e = new Date(a.end), li = document.createElement('li');
+            const day = a.end > a.start ? `${s.getUTCDate()}.–${e.getUTCDate()}. ${MONTHS[e.getUTCMonth()]}` : DAYS[s.getUTCDay()];   // datoen står allerede i boksen
+            li.className = 'month-item';
+            li.innerHTML = '<time><b></b><span></span></time><div><strong></strong><small></small></div>';
+            li.querySelector('time').dateTime = s.toISOString().slice(0, 10);
+            li.querySelector('b').textContent = s.getUTCDate();
+            li.querySelector('time span').textContent = MONTHS[s.getUTCMonth()].slice(0, 3);
+            li.querySelector('strong').textContent = a.title;
+            li.querySelector('small').textContent = day + (a.time ? ' kl. ' + a.time : '') + (a.place && !a.place.includes('?') ? ' på ' + a.place : '');
+            return li;
+        }));
+        box.hidden = false;
+    }
 })();

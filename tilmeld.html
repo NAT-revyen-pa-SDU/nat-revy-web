@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tilmeld - NAT Revyen</title>
+    <title>Tilmeld dig - NAT Revyen</title>
     <meta name="description" content="Bliv medlem af NAT Revyen på SDU. Tilmeld dig via NemTilmeld, eller skriv til os, hvis du har spørgsmål.">
     <meta name="theme-color" content="#14032f">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Instrument+Sans:wght@400..700&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,66 +24,101 @@
 <main id="indhold" class="contact-page">
     <div class="contact-hero">
         <div class="contact-copy">
-            <p class="kicker">Bliv medlem</p>
             <h1>Tilmeld dig</h1>
             <p class="contact-intro">Vi leder hele tiden efter nye medlemmer. Du kan tilmelde dig via NemTilmeld, og hvis du har spørgsmål,
                 kan du skrive til os eller kontakte os på Facebook</p>
-            <a href="https://sdusnatrevy.nemtilmeld.dk/" class="btn-cta contact-cta" target="_blank" rel="noopener noreferrer">Gå til NemTilmeld</a>
-
+            <a href="https://sdusnatrevy.nemtilmeld.dk/" class="btn-cta contact-cta" target="_blank" rel="noopener noreferrer">Tilmeld dig på NemTilmeld</a>
             <h2 class="contact-subhead">Har du spørgsmål?</h2>
             <ul class="contact-list">
                 <li>
                     <a class="contact-row" href="https://m.me/61552933400622" target="_blank" rel="noopener noreferrer">
-                        <span class="contact-text"><small>Messenger</small><strong>Skriv til os på Facebook</strong></span>
+                        <span class="contact-text"><small>Beskeder</small><strong>Facebook Messenger</strong></span>
+                        <span class="contact-action">Skriv til os</span>
+                        <span class="skew-tag row-tag">Er du i tvivl?</span>
                     </a>
                 </li>
                 <li>
                     <a class="contact-row" href="mailto:natrevy@org.sdu.dk">
                         <span class="contact-text"><small>E-mail</small><strong>natrevy@org.sdu.dk</strong></span>
+                        <span class="contact-action">Send e-mail</span>
                     </a>
                 </li>
                 <li>
                     <a class="contact-row" href="https://www.facebook.com/profile.php?id=61552933400622" target="_blank" rel="noopener noreferrer">
-                        <span class="contact-text"><small>Facebook</small><strong>Besøg vores Facebook</strong></span>
+                        <span class="contact-text"><small>Facebook</small><strong>NAT Revyen</strong></span>
+                        <span class="contact-action">Besøg siden</span>
+                    </a>
+                </li>
+                <!-- Næste møde eller sociale arrangement fra kalender-arket (udfyldes af events.js). Står sidst, så intet hopper, når den dukker op -->
+                <li data-next-event data-rings="Møder, Socialt" hidden>
+                    <a class="contact-row" href="kalender.html">
+                        <span class="contact-text"><small>Mød os</small><strong class="next-event-text"></strong></span>
+                        <span class="contact-action">Se kalenderen</span>
                     </a>
                 </li>
             </ul>
         </div>
 
-        <figure class="contact-photo">
-            <img src="images/web/slutsang-1600.webp" alt="Holdet synger slutsangen på scenen" width="1600" height="1067">
+        <figure class="contact-photo is-spot">
+            <img src="images/web/plads-til-dig-1600.webp" alt="Tre skuespillere på scenen peger mod en tom silhuet med magenta kant, hvor der står Dig?" width="1600" height="1067">
+            <figcaption class="photo-spot" aria-hidden="true">Dig?</figcaption>
         </figure>
     </div>
 
-    <section class="faq" aria-labelledby="faq-titel">
-        <h2 id="faq-titel">Godt at vide</h2>
+    <section class="faq band" aria-labelledby="godt-at-vide">
+        <h2 id="godt-at-vide">Godt at vide</h2>
         <div class="faq-list">
+            <div class="faq-item faq-lead">
+                <h3>Hvorfor skal jeg være med?</h3>
+                <p class="faq-answer">Fordi det er sjovere end at læse til eksamen!</p>
+                <p>Du bliver en del af et godt fællesskab på tværs af studier, hvor man ses hele året og ikke kun op til forestillingen. Du prøver noget helt andet end dit studie og står til sidst på scenen i Studenterhuset Odense med en forestilling, du selv har været med til at lave.</p>
+            </div>
             <div class="faq-item">
                 <h3>Skal jeg have erfaring?</h3>
-                <p>Nej. Du kan komme ind med meget, lidt eller ingen erfaring. Det kræver ikke noget at være med. Skriv til os hvis du har spørgsmål.</p>
+                <p class="faq-answer">Nej.</p>
+                <p>Du kan komme ind med meget, lidt eller ingen erfaring. Det kræver ikke noget at være med.</p>
             </div>
             <div class="faq-item">
                 <h3>Kan jeg være med, hvis jeg ikke læser på NAT?</h3>
-                <p>Ja. Du er velkommen, uanset hvilket fakultet du læser på. Omkring en fjerdel af medlemmerne plejer at komme fra andre fakulteter, fra TEK og SAMF til HUM.</p>
+                <p class="faq-answer">Ja.</p>
+                <p>Du er velkommen, uanset hvilket fakultet du læser på. Omkring en fjerdel af medlemmerne plejer at komme fra andre fakulteter.</p>
+                <ul class="tags faculty-tags" aria-label="Fakulteter på SDU"><li>SAMF</li><li>HUM</li><li class="is-home">NAT</li><li>TEK</li><li>SUND</li><li>Business</li><li>Dimittend</li></ul>
             </div>
             <div class="faq-item">
                 <h3>Hvad koster det?</h3>
-                <p>Lige nu er det gratis at være medlem. Tidligere har et medlemskab kostet omkring 35 kr., per. sæson, så prisen kan ændre sig.</p>
+                <p class="faq-answer">Gratis.</p>
+                <p>I hvert fald lige nu. Tidligere har et medlemskab kostet omkring 35 kr. pr. sæson, så prisen kan ændre sig. Hvis du læser Mat-Øk, er der et tillæg på 670kr.</p>
             </div>
             <div class="faq-item">
                 <h3>Hvad kan jeg lave?</h3>
-                <p>Du kan stå på scenen, spille i bandet, skrive sketches, instruere, hjælpe backstage eller lave scenografi og kostumer. <a href="index.html#roller">Se rollerne</a>.</p>
+                <p class="faq-answer">Næsten alt.</p>
+                <p>Du kan stå på scenen, spille i bandet, skrive sketches, instruere, hjælpe backstage eller lave scenografi og kostumer, hjælper med mad og snacks, arrangere fester.. <a href="index.html#roller">Se rollerne</a>.</p>
             </div>
             <div class="faq-item">
                 <h3>Hvor meget tid tager det?</h3>
-                <p>Det meste er frivilligt. Gennem året er der øvearrangementer og masser af sociale arrangementer:</p>
-                <!-- Listen fader ud til højre, så det ser ud, som om den bare bliver ved -->
-                <ul class="fade-list"><li>Pubcrawl</li><li>Sketchskrivning</li><li>Fester</li><li>Hyttetur</li><li>Jamaftener</li><li>Sommerhygge</li><li>Brætspil</li><li>Vægklatring</li><li>Bodegahygge</li><li>Juleafslutning</li><li>Efterfest</li><li>og meget mere</li></ul>
-                <p>Op til forestillingen den første weekend i oktober er der intensuge, hvor man bruger meget tid sammen. <a href="kalender.html">Se hele sæsonen i kalenderen</a>.</p>
+                <p class="faq-answer">Det bestemmer du mest selv.</p>
+                <p>Det meste er frivilligt. Gennem året er der øvearrangementer og masser af sociale arrangementer. Op til forestillingen den første weekend i oktober er der intensuge, hvor man bruger meget tid sammen. </p>
+                <!-- Listen glider langsomt rundt. Den anden kopi gør, at den kører i ring uden hop; skærmlæsere læser kun den første -->
+                <div class="ticker">
+                    <ul class="tags ticker-track"><li>Pubcrawl</li><li>Sketchskrivning</li><li>Fester</li><li>Hyttetur</li><li>Jamaftener</li><li>Sommerhygge</li><li>Brætspil</li><li>Vægklatring</li><li>Bodegahygge</li><li>Juleafslutning</li><li>Efterfest</li></ul>
+                    <ul class="tags ticker-track" aria-hidden="true"><li>Pubcrawl</li><li>Sketchskrivning</li><li>Fester</li><li>Hyttetur</li><li>Jamaftener</li><li>Sommerhygge</li><li>Brætspil</li><li>Vægklatring</li><li>Bodegahygge</li><li>Juleafslutning</li><li>Efterfest</li></ul>
+                </div>
+                <p>Se <a href="index.html#saesonen">sæsonens forløb</a> eller <a href="kalender.html">hele kalenderen</a>.</p>
             </div>
             <div class="faq-item">
                 <h3>Hvordan melder jeg mig ind?</h3>
-                <p>Tilmeld dig via NemTilmeld øverst på siden. Har du spørgsmål først, så skriv til <a href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a> eller til os på <a href="https://m.me/61552933400622" target="_blank" rel="noopener noreferrer">Facebook</a>.</p>
+                <p class="faq-answer">Via NemTilmeld.</p>
+                <p>Knappen står øverst på siden. Har du spørgsmål først, så skriv til <a href="mailto:natrevy@org.sdu.dk">natrevy@org.sdu.dk</a> eller til os på <a href="https://m.me/61552933400622" target="_blank" rel="noopener noreferrer">Facebook</a>.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Hvordan melder jeg mig ud?</h3>
+                <p class="faq-answer">Umuligt.</p>
+                <p>Det er fuldstændig umuligt.</p>
+            </div>
+            <div class="faq-item faq-ask">
+                <h3>Står dit spørgsmål ikke her?</h3>
+                <p>Skriv til os på Messenger, så får du svar fra en af os.</p>
+                <a class="btn-cta" href="https://m.me/61552933400622" target="_blank" rel="noopener noreferrer">Skriv til os</a>
             </div>
         </div>
     </section>
@@ -92,6 +127,7 @@
 <div id="footer"></div>
 
 <script src="layout.js"></script>
+<script src="events.js"></script>
 
 </body>
 

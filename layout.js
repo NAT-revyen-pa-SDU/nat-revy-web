@@ -9,14 +9,8 @@ const LOGO_LAYERS =
 const fillLogos = () => document.querySelectorAll('.logo-mark:empty').forEach(mark => mark.innerHTML = LOGO_LAYERS);
 fillLogos();
 
-// Runde logo-mærker popper frem, når de kommer i syne, og animeres ved tryk
+// Logo-mærket på forsiden hopper ved tryk (ved hover klarer CSS det)
 document.querySelectorAll('.logo-badge').forEach(badge => {
-    badge.classList.add('pop');
-    new IntersectionObserver(([entry], observer) => {
-        if (!entry.isIntersecting) return;
-        badge.classList.add('in');
-        observer.disconnect();
-    }, {threshold: 0.6}).observe(badge);
     badge.addEventListener('click', () => {
         badge.classList.remove('spin');
         void badge.offsetWidth;   // genstart animationen
