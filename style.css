@@ -2076,7 +2076,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 }
 
 /* Årshjul og liste */
-.hjul.intro #view svg { animation: wheel-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.hjul.intro #view > svg { animation: wheel-in 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .hjul.intro .hjul-list { animation: rise 0.6s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 @keyframes wheel-in {
@@ -2485,7 +2485,7 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .hjul[data-view="list"] .hjul-layout { grid-template-columns: minmax(0, 1fr); }
 
 /* Hjulet */
-.hjul svg {
+#view > svg {   /* selve hjulet (ikonerne i listerne er også svg) */
     display: block;
     width: 100%;
     height: auto;
@@ -2510,6 +2510,17 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .hjul .phase-div {
     stroke: var(--border-strong);
     stroke-width: 2;
+}
+
+.hjul .year-div {
+    stroke: var(--text-muted);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+}
+
+.hjul .year-label {
+    fill: var(--text-muted);
+    font: 600 13px var(--font-display);
 }
 
 /* Faserne i den yderste ring */
@@ -2757,6 +2768,52 @@ html:has(.lightbox[open]) { overflow: hidden; }
 }
 
 .ev.is-ferie strong { color: var(--text-muted); }
+
+/* Ikonet for slags arrangement (se eventIcon i events.js): i ringens farve i listen, i tekstens farve ved filtrene */
+.icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.4em;
+    vertical-align: -0.125em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ev strong .icon { color: var(--c); }
+
+.ev strong,
+.month-item strong {   /* ikonet bliver ved første linje, når en lang titel brydes */
+    display: flex;
+    align-items: baseline;
+}
+
+.ev strong .icon,
+.month-item strong .icon { translate: 0 0.15em; }
+.filter .icon { margin-right: -0.15em; }
+.hjul-tip .icon { color: var(--text-muted); }
+
+/* Link til begivenheden (fx på Facebook) i højre side af arrangementet */
+.hjul-list .has-link { position: relative; }
+.has-link .ev { padding-right: 3rem; }
+
+.ev-link {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    translate: 0 -50%;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--text-muted);
+    transition: color var(--transition);
+}
+
+.ev-link:hover { color: var(--text); }
 
 @media (max-width: 1000px) {
     .hjul-layout { grid-template-columns: 1fr; }

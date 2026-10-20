@@ -1,8 +1,8 @@
 // Kalenderen: årshjul, måned og liste over sæsonens arrangementer (data hentes via events.js)
 (() => {
-    const DAY = 864e5, TAU = Math.PI * 2;
-    const {START: SEASON_START, PHASES, MONTHS, seasonOf, phaseStart, phaseEnd, phaseOf, phaseSpan} = window.Season;   // sæsonen og faserne (se events.js)
-    const BREAKS = [['Juleferie', 11, 20, 0, 4], ['Sommerferie', 6, 1, 7, 31]];   // universitetets ferier: [navn, fra måned, dag, til måned, dag]
+    const DAY = 864e5, TAU = Math.PI * 2, {eventIcon} = window;
+    const {PHASES, MONTHS, seasonStart, seasonOf, phaseStart, phaseEnd, phaseOf, phaseSpan} = window.Season;   // sæsonen og faserne (se events.js)
+    const BREAKS = [['Juleferie', 11, 20, 0, 4], ['Sommerferie', 6, 1, 7, 31]];   // universitetets ferier: [navn, fra måned (0 = januar), dag, til måned, dag]
     const R = {out: 384, phIn: 350, moIn: 318, catOut: 308, catIn: 112, center: 100, gap: 5};   // radier i hjulet
     const NAV_HEIGHT = 79;   // navbarens højde; kontrollinjen hænger lige under den
     const $ = id => document.getElementById(id);
@@ -27,11 +27,11 @@
         try {
             acts = await loadEvents();
             rings = [...new Set(acts.map(a => a.ring))];
-            // Året vælges ud fra arkets datoer: det med den næste aktivitet, ellers det seneste. Senere år kan ikke vælges.
-            const all = [...new Set(acts.map(a => seasonOf(a.start)))].sort((a, b) => a - b);
+            // Hjulet åbner på sæsonen med den næste aktivitet (ellers den seneste), og man kan bladre mellem alle sæsoner i arket
+            const all = [...new Set(acts.map(a => seasonOf(a.start)))];
             const next = acts.filter(a => a.end >= TODAY).sort((a, b) => a.start - b.start)[0];
-            season = next ? seasonOf(Math.max(next.start, TODAY)) : all.at(-1) ?? season;
-            seasons = all.filter(y => y < season).concat(season);
+            season = next ? seasonOf(Math.max(next.start, TODAY)) : Math.max(...all, season);
+            seasons = [...new Set([...all, season])].sort((a, b) => a - b);
             if (next) month = Math.max(firstMonth, addMonths(Math.max(next.start, TODAY), 0));   // måneden åbner ved det næste arrangement
             $('status').hidden = true;
         } catch (e) {
@@ -86,8 +86,9 @@
 
     function wheel(S, E, items) {
         let bg = '', under = '', lines = '', marks = '';
-        for (let m = 0; m < 12; m++) {
-            const t0 = Date.UTC(season, SEASON_START + m, 1), t1 = Date.UTC(season, SEASON_START + m + 1, 1), cur = TODAY >= t0 && TODAY < t1;
+        const m0 = new Date(S).getUTCMonth(), todayIn = TODAY >= S && TODAY < E;
+        for (let m = 0; m < 12; m++) {   // sæsonen begynder midt i en måned, så den måned står både først og sidst i sæsonen
+            const t0 = Date.UTC(season, m0 + m, 1), t1 = Date.UTC(season, m0 + m + 1, 1), cur = todayIn && new Date(TODAY).getUTCMonth() === (m0 + m) % 12;
             const [x, y] = P((R.phIn + R.moIn) / 2, (A(t0) + A(t1)) / 2), [lx, ly] = P(R.phIn, A(t0));
             bg += `<path class="mo${cur ? ' cur' : m % 2 ? ' alt' : ''}" d="${sector(R.moIn, R.phIn, A(t0), A(t1))}"/>
                 <text class="ml${cur ? ' cur' : ''}" x="${x}" y="${y}">${(m => m[0].toUpperCase() + m.slice(1, 3))(MONTHS[new Date(t0).getUTCMonth()])}</text>`;
@@ -95,7 +96,7 @@
         }
 
         // Faserne: en ring yderst med navnene, og en tydelig streg ved hvert skift hen over hele hjulet
-        const nowPhase = TODAY >= S && TODAY < E ? phaseOf(TODAY) : -1;
+        const nowPhase = todayIn ? phaseOf(TODAY) : -1;
         PHASES.forEach(([name, , , short], i) => {
             const a0 = A(phaseStart(i, season)), a1 = A(phaseEnd(i, season)), [x0, y0] = P(R.center, a0), [x1, y1] = P(R.out, a0);
             const cls = i === nowPhase ? ' cur' : '';
@@ -129,7 +130,7 @@
                 const attrs = `class="act${a.tbc ? ' tbc' : ''}${sel === a.id ? ' sel' : ''}" data-id="${a.id}" aria-label="${esc(a.title + ', ' + fmtWhen(a))}" style="--c:${color(ring)}"`;
                 if (a.start === a.end) {
                     const [cx, cy] = P((lr0 + lr1) / 2, A(s + DAY / 2));
-                    marks += `<circle ${attrs} cx="${cx}" cy="${cy}" r="${Math.min(7, Math.max(3.5, lt * .3))}"/>`;
+                    marks += `<circle ${attrs} cx="${cx}" cy="${cy}" r="${Math.min(9, Math.max(4.5, lt * .42))}"/>`;
                 } else marks += `<path ${attrs} d="${sector(lr0 + 1, lr1 - 1, A(s), A(e))}"/>`;
                 if (a.kind === 'forestilling') {   // forestillinger fremhæves med en kile og en stjerne
                     const [x, y] = P((R.phIn + R.moIn) / 2, (A(s) + A(e)) / 2);
@@ -139,12 +140,18 @@
             }
         });
 
-        if (TODAY >= S && TODAY < E) {
+        // Årsskiftet: en streg kl. 12 hen over hele hjulet, med årstallene på hver side over hjulet
+        const [yx, yy] = P(R.out + 14, 0);
+        lines += `<line class="year-div" y1="${-R.center}" x2="${yx}" y2="${yy}"/>
+            <text class="year-label" x="-7" y="${yy - 2}" text-anchor="end">${season}</text>
+            <text class="year-label" x="7" y="${yy - 2}">${season + 1}</text>`;
+
+        if (todayIn) {
             const [x, y] = P(R.out + 4, A(TODAY + DAY / 2));
             marks += `<line class="today" x2="${x}" y2="${y}"/><circle class="today-dot" cx="${x}" cy="${y}" r="5"/>`;
         }
         const show = acts.find(a => a.kind === 'forestilling' && within(a, S, E));
-        return `<svg viewBox="-394 -394 788 788" role="img" aria-label="Årshjul for sæson ${seasonLabel()}"${sel !== null ? ' class="has-sel"' : ''}>
+        return `<svg viewBox="-394 -418 788 812" role="img" aria-label="Årshjul for sæson ${seasonLabel()}"${sel !== null ? ' class="has-sel"' : ''}>
             <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="7" fill="rgba(255,255,255,.13)"/></pattern></defs>
             ${bg}${under}${lines}${marks}<circle class="center" r="${R.center}"/>
             ${centerText(nowPhase, show)}</svg>`;
@@ -159,13 +166,24 @@
     }
 
     /* Listerne */
+    const ICONS = {   // til linket i højre side af et arrangement
+        facebook: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
+        link: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>'
+    };
+    function eventLink(a) {
+        if (!a.link) return '';
+        const fb = /facebook\.com|fb\.me/i.test(a.link);
+        return `<a class="ev-link" href="${esc(a.link)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(a.title)}${fb ? ' på Facebook' : ': mere information'}">${fb ? ICONS.facebook : ICONS.link}</a>`;
+    }
+
     function item(a) {
         const d = new Date(a.start), kind = ['forestilling', 'deadline', 'ferie'].includes(a.kind) ? ' is-' + a.kind : '';
         const tags = [a.kind === 'forestilling' && 'Forestilling', a.kind === 'deadline' && 'Deadline', a.tbc && 'Foreløbig'].filter(Boolean).join(', ');
-        return `<li><button type="button" class="ev${kind}${a.end < TODAY ? ' past' : ''}${sel === a.id ? ' sel' : ''}" data-id="${a.id}" style="--c:${color(a.ring)}">
+        const link = eventLink(a);
+        return `<li${link ? ' class="has-link"' : ''}><button type="button" class="ev${kind}${a.end < TODAY ? ' past' : ''}${sel === a.id ? ' sel' : ''}" data-id="${a.id}" style="--c:${color(a.ring)}">
             <time><b>${monthOnly(a) ? '?' : d.getUTCDate()}</b>${MONTHS[d.getUTCMonth()].slice(0, 3)}</time>
-            <span><strong>${esc(a.title)}</strong><small>${esc(metaOf(a))}</small>${a.note ? `<small>${esc(a.note)}</small>` : ''}${tags ? `<em>${tags}</em>` : ''}</span>
-        </button></li>`;
+            <span><strong>${eventIcon(a.ring, a.kind)}${esc(a.title)}</strong><small>${esc(metaOf(a))}</small>${a.note ? `<small>${esc(a.note)}</small>` : ''}${tags ? `<em>${tags}</em>` : ''}</span>
+        </button>${link}</li>`;
     }
 
     function list(items) {
@@ -195,7 +213,7 @@
             const evs = items.filter(a => a.kind !== 'ferie' && !monthOnly(a) && a.start <= t && a.end >= t);
             o += `<div class="cal-day${t === TODAY ? ' today' : ''}${t < TODAY ? ' past' : ''}${brk ? ' is-break' : ''}" style="--pc:var(--ph${p})">
                 <span class="cal-num">${new Date(t).getUTCDate()}</span>${starts ? `<span class="cal-phase">${PHASES[p][0]}</span>` : ''}
-                ${evs.map(a => `<button type="button" class="cal-ev${a.tbc ? ' tbc' : ''}${sel === a.id ? ' sel' : ''}" data-id="${a.id}" style="--c:${color(a.ring)}" title="${esc(a.title)}">${esc(a.title)}</button>`).join('')}</div>`;
+                ${evs.map(a => `<button type="button" class="cal-ev${a.tbc ? ' tbc' : ''}${sel === a.id ? ' sel' : ''}" data-id="${a.id}" style="--c:${color(a.ring)}" title="${esc(a.title)}">${eventIcon(a.ring, a.kind)}${esc(a.title)}</button>`).join('')}</div>`;
         }
         const inMonth = items.filter(a => within(a, M, N));
         return `<div class="cal">${o}</div>` + (inMonth.length ? list(inMonth) : `<p class="hjul-status">Ingen arrangementer i ${MONTHS[new Date(M).getUTCMonth()]}</p>`);
@@ -208,9 +226,9 @@
     }
 
     function render() {
-        const S = Date.UTC(season, SEASON_START, 1), E = Date.UTC(season + 1, SEASON_START, 1);
+        const S = seasonStart(season), E = seasonStart(season + 1);
         const items = [...acts, ...breaks].filter(a => !hidden.has(a.ring)).sort((a, b) => a.start - b.start || a.end - b.end);
-        const last = Date.UTC(seasons.at(-1) + 1, SEASON_START, 1), i = seasons.indexOf(season);   // kalenderen stopper med det sidste år, der kan vælges
+        const last = seasonStart(seasons.at(-1) + 1), i = seasons.indexOf(season);   // kalenderen stopper med det sidste år, der kan vælges
         document.querySelector('.hjul').dataset.view = view;
         if (view === 'month') {   // pilene bladrer måned for måned, fra denne måned til sidste sæsons slutning
             $('label').textContent = monthLabel(month);
@@ -232,7 +250,7 @@
         $('show').innerHTML = banner();
         $('show').hidden = !$('show').innerHTML;
         $('filters').innerHTML = [...rings, 'Ferie'].map(r =>   // afkrydsningsfelter i ringens farve
-            `<button type="button" class="filter" data-ring="${esc(r)}" aria-pressed="${!hidden.has(r)}" style="--c:${color(r)}"><i aria-hidden="true"></i>${esc(r)}</button>`).join('')
+            `<button type="button" class="filter" data-ring="${esc(r)}" aria-pressed="${!hidden.has(r)}" style="--c:${color(r)}"><i aria-hidden="true"></i>${eventIcon(r)}${esc(r)}</button>`).join('')
             + (hidden.size ? '<button type="button" class="filter-reset" data-reset>Vis alle</button>' : '');
         $('filterToggle').textContent = hidden.size ? `Filtrer (${hidden.size} skjult)` : 'Filtrer';
         document.querySelectorAll('.hjul-tabs [data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === view));
@@ -307,7 +325,7 @@
         layout.querySelectorAll(`[data-id="${el.dataset.id}"]`).forEach(x => x.classList.add('hov'));
         if (!el.closest('svg') || e.pointerType === 'touch') return;
         const a = [...acts, ...breaks].find(x => x.id === el.dataset.id);
-        tip.innerHTML = `<b>${esc(a.title)}</b><span>${esc(metaOf(a))}</span>`;
+        tip.innerHTML = `<b>${eventIcon(a.ring, a.kind)}${esc(a.title)}</b><span>${esc(metaOf(a))}</span>`;
         tip.hidden = false;
         moveTip(e);
     });
